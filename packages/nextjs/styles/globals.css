@@ -30,3 +30,103 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+.collection-slider {
+	padding-bottom:2rem
+  }
+  .collection-slider-row {
+	margin-bottom:0
+  }
+  .collection-slider-row-slider {
+	display:inline-block
+  }
+  .collection-slider-row-slider .vifnslb-bar {
+	display:flex
+  }
+  .collection-slider-row-slider .vifnslb-bar>div {
+	padding:.5rem
+  }
+  .collection-slider-row-slider .vifnslb-bar>div img {
+	max-width:7rem;
+	border-radius:20px;
+	box-shadow:-2px -2px 0 #fff,0 -2px 0 #fff,2px -2px 0 #fff,2px 0 0 #fff,2px 2px 0 #fff,0 2px 0 #fff,-2px 2px 0 #fff,-2px 0 0 #fff,2px 8px 0 #fff,1px 8px 0 #fff,0 8px 0 #fff,-1px 8px 0 #fff,-2px 8px 0 #fff
+  }
+  @media screen and (min-width:1024px) {
+	.collection-slider {
+	  padding-bottom:2rem
+	}
+	.collection-slider-row {
+	  margin-bottom:0
+	}
+	.collection-slider-row-slider {
+	  display:inline-block
+	}
+	.collection-slider-row-slider .vifnslb-bar {
+	  display:flex
+	}
+	.collection-slider-row-slider .vifnslb-bar>div {
+	  padding:.75rem
+	}
+	.collection-slider-row-slider .vifnslb-bar>div img {
+	  max-width:15rem;
+	  border-radius:20px;
+	  box-shadow:-2px -2px 0 #fff,0 -2px 0 #fff,2px -2px 0 #fff,2px 0 0 #fff,2px 2px 0 #fff,0 2px 0 #fff,-2px 2px 0 #fff,-2px 0 0 #fff,2px 8px 0 #fff,1px 8px 0 #fff,0 8px 0 #fff,-1px 8px 0 #fff,-2px 8px 0 #fff
+	}
+  }
+  .collection {
+	background:#001127;
+	color:#fff;
+	margin-top:-.25rem;
+	z-index:999;
+	position:relative
+  }
+  .collection h2 {
+	font-size:48px;
+	text-transform:uppercase
+  }
+  .collection h2 .fix {
+	margin-right:1px
+  }
+  .collection p {
+	font-weight:lighter;
+	text-shadow:0 0 10px #000
+  }
+  .collection-bg {
+	width:100%;
+	margin-top:0;
+	position:absolute;
+	background:linear-gradient(0deg,#001127,rgba(0,17,39,0) 50%),linear-gradient(180deg,#001127,rgba(0,17,39,0) 25%),url(../img/night.58517f5a.png) no-repeat;
+	height:900px;
+	background-size:cover;
+	background-position:center 0,center 0,center -150px;
+	filter:opacity(.5) blur(10px)
+  }
+  .collection>.container {
+	padding:2rem;
+	text-align:center
+  }
+  @media screen and (min-width:1024px) {
+	.collection {
+	  background:#001127;
+	  color:#fff
+	}
+	.collection h2 {
+	  font-size:90px;
+	  text-transform:uppercase
+	}
+	.collection p {
+	  font-weight:lighter;
+	  font-size:24px;
+	  margin:3rem 0
+	}
+	.collection-bg {
+	  width:100%;
+	  height:1100px;
+	  background-size:cover;
+	  background-position:center 0,center 0,center -150px
+	}
+	.collection>.container {
+	  padding:5rem 2rem;
+	  text-align:center
+	}
+  }

@@ -1,71 +1,87 @@
 "use client";
 
 import Link from "next/link";
+import React from 'react';
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
+
+const CollectionSliderRow = ({ images }) => {
+	return (
+	  <div className="collection-slider-row">
+		<div className="collection-slider-row-slider vifnslb-container">
+		  <div className="vifnslb-element" style={{ animationDuration: '30s', animationDirection: 'normal', animationDelay: '0s' }}>
+			<div className="vifnslb-bar">
+			  {images.map((image, index) => (
+				<div key={index}><img src={image} alt={`Image ${index}`} /></div>
+			  ))}
+			</div>
+			<div className="vifnslb-bar">
+			  {images.map((image, index) => (
+				<div key={index}><img src={image} alt={`Image ${index}`} /></div>
+			  ))}
+			</div>
+		  </div>
+		</div>
+	  </div>
+	);
+  };
+
+  class Collection extends React.Component {
+	render() {
+	  return (
+		<div className="collection">
+		  <div className="collection-bg" style={{ opacity: 2.13567 }}></div>
+		  <div className="container" style={{ opacity: 1.13567 }}>
+			<h2>Squishi<span className="fix"></span>verse Collection</h2>
+			<p>Welcome to the Squishiverse, where cute, digital collectibles come to life. Inspired by iconic slime characters from Asian media, our Web3-native brand offers a wide range of heartwarming experiences, from collectibles and stories to merchandise and more. As a leader in the metaverse, we are dedicated to pushing the boundaries of Web3 and delivering innovative experiences.</p>
+			<p>As a Squishie holder, you'll be part of a tight-knit community that values empowerment and strength. You'll have access to exclusive token-gated channels, events, individual IP opportunities, whitelists, NFTs, and other benefits throughout the Squishiverse ecosystem. Join us and discover all that the Squishiverse has to offer.</p>
+		  </div>
+		  <div className="collection-slider">
+			<CollectionSliderRow images={[
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img'
+			]} />
+			<CollectionSliderRow images={[
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img'
+			]} />
+			<CollectionSliderRow images={[
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img',
+			  '/img'
+			]} />
+		  </div>
+		</div>
+	  );
+	}
+  }
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <div className="flex justify-center items-center space-x-2">
-            <p className="my-2 font-medium">Connected Address:</p>
-            <Address address={connectedAddress} />
-          </div>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
-        </div>
-
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contract
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 };
 
-export default Home;
+export default Collection;
