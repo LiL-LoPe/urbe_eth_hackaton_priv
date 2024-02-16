@@ -8,7 +8,6 @@
 
 //   await deploy("NuminousNecessities", {
 //     from: deployer,
-//     args: [],
 //     log: true,
 //     autoMine: true,
 //   });
