@@ -56,28 +56,28 @@ contract NuminousNecessities is ERC1155 {
 }
 
 
- function mintTarot() external payable {
-        require(msg.value >= TarotsPrice, "Insufficient funds");
-
-        // Incremento del contatore dei Tarots mintati per l'indirizzo del mittente
-        mintedTarots[msg.sender]++;
-
-        // Mint del nuovo NFT della collezione Tarots
-        _mint(msg.sender, TarotsCollection, mintedTarots[msg.sender], "");
-
-        // Mint contemporaneo di un certo numero di token Numinous
-        _mint(msg.sender, NuminousToken, 5, "");
-        mintedNuminous[msg.sender] += 5;
-    }
-
-    // Funzione per mintare un token dalla collezione Numinous
-    function mintNuminous() external payable {
-        require(msg.value >= TokenPrice, "Insufficient funds");
-
-        // Incremento del contatore dei Token mintati per l'indirizzo del mittente
-        mintedNuminous[msg.sender]++;
-
-        // Mint del nuovo token dalla collezione Numinous
-        _mint(msg.sender, NuminousToken, 1, "");
-    }
-}
+ //function mintTarot() external payable {
+ //       require(msg.value >= TarotsPrice, "Insufficient funds");
+//
+ //       // Incremento del contatore dei Tarots mintati per l'indirizzo del mittente
+ //       mintedTarots[msg.sender]++;
+//
+ //       // Mint del nuovo NFT della collezione Tarots
+ //       _mint(msg.sender, TarotsCollection, mintedTarots[msg.sender], "");
+//
+ //       // Mint contemporaneo di un certo numero di token Numinous
+ //       _mint(msg.sender, NuminousToken, 5, "");
+ //       mintedNuminous[msg.sender] += 5;
+ //   }
+//
+ //   // Funzione per mintare un token dalla collezione Numinous
+ //   function mintNuminous() external payable {
+ //       require(msg.value >= TokenPrice, "Insufficient funds");
+//
+ //       // Incremento del contatore dei Token mintati per l'indirizzo del mittente
+ //       mintedNuminous[msg.sender]++;
+//
+ //       // Mint del nuovo token dalla collezione Numinous
+ //       _mint(msg.sender, NuminousToken, 1, "");
+ //   }
+//}
