@@ -28,7 +28,7 @@ contract NuminousNecessities is ERC1155 {
  
         _mint(msg.sender, TarotsCollection, 22, "");
         _mint(msg.sender, SignsCollection, 12, "");
-        _mint(msg.sender, TokenCollection, 1200, "");
+        _mint(msg.sender, NuminousToken, 1200, "");
     }
 
 
@@ -45,7 +45,6 @@ contract NuminousNecessities is ERC1155 {
     function mintSign() external payable {
         require(mintedTarots[msg.sender] > 0, "You must own at least one Tarot to mint a Sign");
         require(msg.value >= SignsPrice, "Insufficient funds");
-
 
         mintedSigns[msg.sender]++;
 
