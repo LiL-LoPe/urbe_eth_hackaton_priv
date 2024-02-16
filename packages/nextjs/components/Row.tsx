@@ -7,9 +7,9 @@ class Row extends React.Component {
     return (
       <div className="row">
         {/* Render three image components with different image paths */}
-        <Image imagePath="./1.png" />
-        <Image imagePath="./1.png" />
-        <Image imagePath="./1.png" />
+        <div_img_buttonimage Path="./1.png" />
+        <div_img_buttonimage Path="./1.png" />
+        <div_img_buttonimage Path="./1.png" />
       </div>
     );
   }
