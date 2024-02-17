@@ -27,10 +27,10 @@ contract NuminousNFT is ERC721, Ownable {
 
     constructor(
         string memory _initialBaseURI,
-        string memory _initialContractURINuminous,
+        string memory _initialContractURI,
 
-        string memory _initialBaseURITarrochi,
-        string memory _initialContractURITarrochi
+        string memory _initialBaseURI,
+        string memory _initialContractURI,
     ) {
         baseURINuminous = _initialBaseURINuminous;
         _contractURINuminous = _initialContractURINuminous;
@@ -74,7 +74,7 @@ contract NuminousNFT is ERC721, Ownable {
     // Minting
 
 	function mintNuminous(uint256 amount) public payable {
-        require(isActiveNuminous, "Numinous minting is not active");
+        require(isActive, "Numinous minting is not active");
         require(_currentIdNuminous + amount <= MAX_SUPPLY_NUMINOUS, "Numinous will exceed maximum supply");
         require(msg.value >= priceNuminous * amount, "Insufficient ether sent for Numinous");
 
@@ -87,7 +87,7 @@ contract NuminousNFT is ERC721, Ownable {
     }
 
     function mintTarrochi(uint256 amount) public payable {
-        require(isActiveTarrochi, "Tarrochi minting is not active");
+        require(isActive, "Tarrochi minting is not active");
         require(_currentIdTarrochi + amount <= MAX_SUPPLY_TARROCHI, "Tarrochi will exceed maximum supply");
         require(msg.value >= priceTarrochi * amount, "Insufficient ether sent for Tarrochi");
 
