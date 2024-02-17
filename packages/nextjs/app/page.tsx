@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { Address, AddressInput, Balance } from "~~/components/scaffold-eth";
+import { NFTCard } from "~~/components/NFTCard";
 import {
 	useAccountBalance,
 	useDeployedContractInfo,
@@ -38,6 +39,24 @@ const Home: NextPage = () => {
 		functionName: "sendMessage",
 		args: [newReceiver, newMessage],
 	});
+
+	// Stato per indicare se il minting è in corso
+	const [isMinting, setIsMinting] = useState(false);
+
+	// Funzione per gestire il minting dell'NFT
+	const handleMint = async () => {
+		try {
+			setIsMinting(true); // Imposta lo stato del minting su true per indicare che il minting è in corso
+
+			// Esegui il minting dell'NFT qui
+
+			// Una volta completato il minting, reimposta lo stato del minting su false
+			setIsMinting(false);
+		} catch (error) {
+			console.error("Errore durante il minting:", error);
+			setIsMinting(false); // Assicurati di reimpostare lo stato del minting su false in caso di errore
+		}
+	};
 
 	return (
 		<>
@@ -93,6 +112,11 @@ const Home: NextPage = () => {
 				<button className="btn btn-primary" onClick={sendMessage}>
 					Send Message
 				</button>
+			</div>
+
+			{/* Elemento per mostrare e mintare un NFT */}
+			<div className="p-5">
+				<NFTCard imageUrl="/path_to_your_image.jpg" onClickMint={handleMint} />
 			</div>
 		</>
 	);
