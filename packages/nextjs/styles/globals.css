@@ -4,21 +4,35 @@
 
 :root,
 [data-theme] {
-  background: oklch(var(--b2));
+	background: oklch(var(--b2));
 }
 
 body {
-  min-height: 100vh;
+	min-height: 100vh;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  margin-bottom: 0.5rem;
-  line-height: 1;
+	margin-bottom: 0.5rem;
+	line-height: 1;
 }
 
 p {
-  margin: 1rem 0;
+	margin: 1rem 0;
+}
+
+.gif-image img.gif {
+	display: none;
+	width: 100%; /* Imposta la larghezza al 100% del contenitore */
+	height: auto; /* Imposta l'altezza in base alla larghezza per mantenere l'aspetto originale */
+}
+
+.gif-image:hover img.gif {
+	display: block;
+}
+
+.gif-image:hover img.img {
+  display: none; /* Nasconde l'immagine PNG quando il mouse ci passa sopra */
 }

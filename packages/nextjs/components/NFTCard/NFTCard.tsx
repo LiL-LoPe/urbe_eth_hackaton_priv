@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-const NFTCard = ({ imageUrl, onClickMint }) => {
+export const NFTCard = ({ imageUrl, onClickMint }) => {
 	return (
 		<div className="nft-card">
 			<a onClick={onClickMint}>
@@ -11,5 +11,3 @@ const NFTCard = ({ imageUrl, onClickMint }) => {
 		</div>
 	);
 };
-
-export default NFTCard;

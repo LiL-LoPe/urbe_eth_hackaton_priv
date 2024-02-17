@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
+import Image from "next/image";
 import { Address, AddressInput, Balance } from "~~/components/scaffold-eth";
 import { NFTCard } from "~~/components/NFTCard";
 import {
@@ -16,40 +17,48 @@ const Home: NextPage = () => {
 	// Prende i dati dell-account
 	const { address } = useAccount();
 
-	// Legge il contratto e la funzione greeting
-	const { data: greeting } = useScaffoldContractRead({
-		contractName: "YourContract",
-		functionName: "greeting",
-	});
-	const { data: yourContract } = useDeployedContractInfo("YourContract");
+	const [showTextBox, setShowTextBox] = useState(false);
+	const [value, setValue] = useState(0);
 
-	// Scrive il nuovo greeting usando la funzione setGreeting nel contratto
-	const [newGreeting, setNewGreeting] = useState("");
-	const { writeAsync: setGreeting } = useScaffoldContractWrite({
-		contractName: "YourContract",
-		functionName: "setGreeting",
-		args: [newGreeting],
-	});
+	const handleLinkClick = (link) => {
+		switch (link) {
+			case "link1":
+				// Logica per gestire il clic sul link 1
+				console.log("Link 1 clicked");
+				break;
+			case "link2":
+				// Logica per gestire il clic sul link 2
+				console.log("Link 2 clicked");
+				break;
+			case "link3":
+				// Logica per gestire il clic sul link 3
+				console.log("Link 3 clicked");
+				if(!showTextBox)
+					setShowTextBox(true); // Mostra il div con la textbox
+				if(showTextBox)
+					setShowTextBox(false);
+				break;
+			default:
+				console.log("Unknown link clicked");
+		}
+	};
 
-	// Scrive un nuovo messaggio usando la funzione sendMessage nel contratto
-	const [newReceiver, setNewReceiver] = useState("");
-	const [newMessage, setNewMessage] = useState("");
-	const { writeAsync: sendMessage } = useScaffoldContractWrite({
-		contractName: "YourContract",
-		functionName: "sendMessage",
-		args: [newReceiver, newMessage],
+	const { writeAsync: mintSign } = useScaffoldContractWrite({
+		contractName: "NuminousNecessities",
+		functionName: "mintSign",
+		args: [value],
 	});
-
 	// Stato per indicare se il minting è in corso
 	const [isMinting, setIsMinting] = useState(false);
-
 	// Funzione per gestire il minting dell'NFT
-	const handleMint = async () => {
+	const handleMintSign = async () => {
+		if (value > 2) {
+			// Visualizzare un messaggio di errore
+			console.log("Error: you can only mint two.");
+		}
 		try {
 			setIsMinting(true); // Imposta lo stato del minting su true per indicare che il minting è in corso
-
-			// Esegui il minting dell'NFT qui
-
+			await mintSign();
 			// Una volta completato il minting, reimposta lo stato del minting su false
 			setIsMinting(false);
 		} catch (error) {
@@ -58,68 +67,57 @@ const Home: NextPage = () => {
 		}
 	};
 
+	const handleIncrement = () => {
+		setValue((prevValue) => prevValue + 1);
+	};
+
+	const handleDecrement = () => {
+		setValue((prevValue) => (prevValue > 0 ? prevValue - 1 : 0));
+	};
+	
 	return (
 		<>
-			<h1>Home</h1>
-			<p>Welcome to the home page</p>
-			{/* Elementi per mostrare l'indirizzo e il saldo dell'account */}
-			<div className="flex items-center flex-col flex-grow pt-10">
-				<div>
-				<Address address={address} />
-				<Balance address={address} />
+		<div className="landscape-background relative flex justify-center items-center h-screen bg-cover bg-center" style={{ backgroundImage: `url('https://i.ibb.co/Hxh8JHs/bgdefinitivo.jpg')` }}>
+			<div className="landscape-container flex flex-row h-full max-h-screen">
+				{/* Prima parte */}
+				<div className="w-1/3 h-full flex flex-col justify-center items-center relative">
+					<a href="#" onClick={() => handleLinkClick("link1")}>
+						<img src="https://i.ibb.co/6JNK7KF/center.png" alt="center" border="0" />
+					</a>
+				</div>
+
+				{/* Seconda parte */}
+				<div className="w-1/3 h-full flex flex-col justify-center items-center relative">
+					<a href="#" onClick={() => handleLinkClick("link2")}>
+						<img src="https://i.ibb.co/yNJNgTv/center.png" alt="magasmall" border="0" />
+					</a>
+				</div>
+
+				{/* Terza parte */}
+				<div className="w-1/3 h-full flex flex-col justify-center items-center relative">
+					<a href="#" onClick={() => handleLinkClick("link3")} className="gif-image">
+						<img src="https://i.ibb.co/m588y9s/mage2.png" alt="magasmall" border="0" className="img" />
+						<img src="https://i.ibb.co/1LpJKp8/magegif.gif" alt="Animated GIF" className="gif" />
+					</a>
+					{showTextBox && (
+						<div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-16 p-4">
+							<input
+								type="number"
+								value={value}
+								onChange={(e) => setValue(parseInt(e.target.value))}
+								className="w-20 px-2 py-1 mr-2 border border-gray-300 rounded"
+							/>
+							<button onClick={handleDecrement} className="px-3 py-1 mr-2 bg-gray-200 rounded">-</button>
+							<button onClick={handleIncrement} className="px-3 py-1 mr-2 bg-gray-200 rounded">+</button>
+							<button onClick={handleMintSign} className="px-3 py-1 bg-gray-200 rounded">Mint Sign</button>
+						</div>
+					)}
 				</div>
 			</div>
-
-			{/* Elementi per mostrare il greeting e per settare un nuovo greeting */}
-			<div className="p-5 font-black text-xl">{greeting}</div>
-			<div>
-				<Address address={yourContract?.address} />
-				<Balance address={yourContract?.address} />
-			</div>
-
-			<div className="p-5">
-				<input
-					value={newGreeting}
-					placeholder="Type here"
-					className="input"
-					onChange={(e) => setNewGreeting(e.target.value)}
-				/>
-			</div>
-			<div className="p-5">
-				<button className="btn btn-primary" onClick={setGreeting}>
-					Set Greeting
-				</button>
-			</div>
-
-			{/* Elementi per inviare un messaggio */}
-			<div className="p-5">
-				<AddressInput
-					value={newReceiver}
-					placeholder="Recepient?"
-					name={address}
-					onChange={setNewReceiver}
-				/>
-			</div>
-			<div className="p-5">
-				<input
-					value={newMessage}
-					placeholder="Message"
-					className="input"
-					onChange={(e) => setNewMessage(e.target.value)}
-				/>
-			</div>
-			<div className="p-5">
-				<button className="btn btn-primary" onClick={sendMessage}>
-					Send Message
-				</button>
-			</div>
-
-			{/* Elemento per mostrare e mintare un NFT */}
-			<div className="p-5">
-				<NFTCard imageUrl="/path_to_your_image.jpg" onClickMint={handleMint} />
-			</div>
+		</div>
 		</>
-	);
-};
-
-export default Home;
+		);
+	};
+	
+	export default Home;
+	
