@@ -46,7 +46,7 @@ contract NuminousNecessities is Ownable{
 	}
 
 	function getNecessitiesTokenBalance() public view returns (uint256) {
-		return necessitiesToken.balanceOf(address(this));
+		return necessitiesToken.balanceOf(address(msg.sender));
 	}
 
 	function withdrawTokens() public onlyOwner{
