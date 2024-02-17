@@ -17,10 +17,7 @@ contract NuminousNecessities is Ownable{
 	NecessitiesToken necessitiesToken;
 	TarrotsNFT tarrotsNFT;
 
-	constructor(
-		string memory nftBaseURI,
-		string memory nftContractURI
-	) Ownable(msg.sender) {
+	constructor() Ownable(msg.sender) {
 		//SignsNFT.transfer_Ownership(msg.sender);
 		//NecessitiesToken.transfer_Ownership(msg.sender);
 	}
