@@ -5,14 +5,15 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract NuminousNFT is Ownable {
+contract NuminousNFT is ERC721, Ownable {
     using Strings for uint256;
+  
+	bool public isActive = false;
 
     uint256 constant MAX_SUPPLY_NUMINOUS = 5000;
     uint256 private _currentIdNuminous;
 	string public baseURINuminous;
 	string private _contractURINuminous;
-    bool public isActiveNuminous = false;
     uint256 public priceNuminous = 0.25 ether;
     mapping(address => uint256) private _alreadyMintedNuminous;
 
@@ -21,12 +22,11 @@ contract NuminousNFT is Ownable {
     uint256 private _currentIdTarrochi;
     string public baseURITarrochi;
     string private _contractURITarrochi;
-    bool public isActiveTarrochi = false;
     uint256 public priceTarrochi = 0.1 ether;
     mapping(address => uint256) private _alreadyMintedTarrochi;
 
     constructor(
-        string memory _initialBaseURINuminous,
+        string memory _initialBaseURI,
         string memory _initialContractURINuminous,
 
         string memory _initialBaseURITarrochi,
@@ -41,69 +41,39 @@ contract NuminousNFT is Ownable {
 
     // Accessors
 
-    function setActiveNuminous(bool _isActive) public onlyOwner {
-        isActiveNuminous = _isActive;
+    function setActive(bool _isActive) public onlyOwner {
+        isActive = _isActive;
     }
 
-    function alreadyMintedNuminous(address addr) public view returns (uint256) {
-        return _alreadyMintedNuminous[addr];
+    function alreadyMinted(address addr) public view returns (uint256) {
+        return _alreadyMinted[addr];
     }
 
-	function totalSupplyNuminous() public view returns (uint256) {
-    	return _currentIdNuminous;
-    }
-
-
-    function setActiveTarrochi(bool _isActive) public onlyOwner {
-        isActiveTarrochi = _isActive;
-    }
-	
-    function alreadyMintedTarrochi(address addr) public view returns (uint256) {
-        return _alreadyMintedTarrochi[addr];
-    }
-
-    function totalSupplyTarrochi() public view returns (uint256) {
-        return _currentIdTarrochi;
+    function totalSupply() public view returns (uint256) {
+        return _currentId;
     }
 
     // Metadata
 
-    function setBaseURINuminous(string memory uri) public onlyOwner {
-        baseURINuminous = uri;
+    function setBaseURI(string memory uri) public onlyOwner {
+        baseURI = uri;
     }
 
-    function _baseURINuminous() internal view returns (string memory) {
-        return baseURINuminous;
+    function _baseURI() internal view override returns (string memory) {
+        return baseURI;
     }
 
-    function contractURINuminous() public view returns (string memory) {
-        return _contractURINuminous;
+    function contractURI() public view returns (string memory) {
+        return _contractURI;
     }
 
-    function setContractURINuminous(string memory uri) public onlyOwner {
-        _contractURINuminous = uri;
-    }
-
-
-    function setBaseURITarrochi(string memory uri) public onlyOwner {
-        baseURITarrochi = uri;
-    }
-
-    function _baseURITarrochi() internal view returns (string memory) {
-        return baseURITarrochi;
-    }
-
-    function contractURITarrochi() public view returns (string memory) {
-        return _contractURITarrochi;
-    }
-
-    function setContractURITarrochi(string memory uri) public onlyOwner {
-        _contractURITarrochi = uri;
+    function setContractURI(string memory uri) public onlyOwner {
+        _contractURI = uri;
     }
 
     // Minting
 
-    function mintNuminous(uint256 amount) public payable {
+	function mintNuminous(uint256 amount) public payable {
         require(isActiveNuminous, "Numinous minting is not active");
         require(_currentIdNuminous + amount <= MAX_SUPPLY_NUMINOUS, "Numinous will exceed maximum supply");
         require(msg.value >= priceNuminous * amount, "Insufficient ether sent for Numinous");
@@ -153,4 +123,3 @@ contract NuminousNFT is Ownable {
         }
     }
 }
-
