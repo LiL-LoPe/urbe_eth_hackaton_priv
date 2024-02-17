@@ -10,7 +10,12 @@ contract NecessitiesToken is ERC20, Ownable {
 	uint256 public maxSupply;
 
 	constructor() ERC20("NecessitiesToken", "NCSSTKN") Ownable(msg.sender){
-		maxSupply = 4200 * 10 ** uint256(decimals())
+		maxSupply = 4200 * 10 ** uint256(decimals());
+	}
+
+	function mint(address account, uint256 amount) external onlyOwner {
+		require(totalSupply() + amount <= maxSupply, "Exceeds maximum supply");
+		_mint(account, amount);
 	}
 
 	//modifier onlyOwner() {
@@ -20,12 +25,6 @@ contract NecessitiesToken is ERC20, Ownable {
 	//	);
 	//	_;
 	//}
-
-	function mint(address account, uint256 amount) external onlyOwner {
-		require(totalSupply() + amount <= maxSupply, "Exceeds maximum supply");
-		_mint(account, amount);
-	}
-
 	//function transfer_Ownership(address newOwner) external onlyOwner {
 	//	require(newOwner != address(0), "Invalid address");
 	//	require(

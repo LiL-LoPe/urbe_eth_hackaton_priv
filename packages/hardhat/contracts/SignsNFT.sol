@@ -3,42 +3,27 @@ pragma solidity ^0.8.20;
 
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract SignsNFT is ERC721, Ownable {
+contract SignsNFT is ERC721Enumerable, Ownable {
 	using Strings for uint256;
 
 	string _baseTokenURI;
 	uint256 private max_supply = 48;
-	//uint256 private _reserved = 100;
-	//uint256 private _priceSigns = 0.024 ether;
-	//address contract_Owner;
 
 	constructor(
 		string memory baseURI
 	) ERC721("Signs", "SGNNFT") Ownable(msg.sender) {
 		setBaseURI(baseURI);
-		contract_Owner = msg.sender;
 	}
 
 	function mintSigns(uint256 num) external onlyOwner{
 		uint256 supply = totalSupply();
 		require(supply + num <= max_supply, "Exceeds maximum Signs supply");
-
-		//uint256 mintPrice = _priceSigns * num;
-		//require(msg.value != mintPrice, "Ether sent is not correct");
-
-		for (uint256 i; i < num; i++) {
-			_safeMint(msg.sender, supply + i);
-		}
+		_safeMint(msg.sender, num);
 	}
-
-	//function transfer_Ownership(address newOwner) external onlyOwner {
-    //	require(newOwner != address(0), "Invalid address");
-    //	require(msg.sender == contract_Owner, "Only contract owner can call this function");
-    //	contract_Owner = newOwner;
-	//}
 
 	function _baseURI() internal view virtual override returns (string memory) {
 		return _baseTokenURI;
@@ -50,10 +35,10 @@ contract SignsNFT is ERC721, Ownable {
 
 	function withdrawal(uint amount) external onlyOwner {
 		require(amount <= address(this).balance, "Insufficient balance");
-		//payable(owner()).transfer(address(this).balance);
-		payable(contract_Owner).transfer(amount);
+		payable(owner()).transfer(address(this).balance);
 	}
-
+}
+	
 	//function walletOfOwner(
 	//	address _owner
 	//) public view returns (uint256[] memory) {
@@ -89,4 +74,4 @@ contract SignsNFT is ERC721, Ownable {
 	//function pause(bool val) public onlyOwner {
 	//	_paused = val;
 	//}
-}
+

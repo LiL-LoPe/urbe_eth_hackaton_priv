@@ -9,21 +9,6 @@ async function main() {
   const numinousNecessities = await NuminousNecessities.deploy();
   await numinousNecessities.deployed();
   console.log("NuminousNecessities deployed to:", numinousNecessities.address);
-
-  // // Deploy NecessitiesToken contract
-  // const NecessitiesToken = await ethers.getContractFactory("NecessitiesToken");
-  // console.log("Deploying NecessitiesToken...");
-  // const necessitiesToken = await NecessitiesToken.deploy();
-  // await necessitiesToken.deployed();
-  // console.log("NecessitiesToken deployed to:", necessitiesToken.address);
-
-  // // Deploy NuminousNFT contract
-  // const NuminousNFT = await ethers.getContractFactory("NuminousNFT");
-  // console.log("Deploying NuminousNFT...");
-  // const NuminousNFT = await NuminousNFT.deploy();
-  // await NuminousNFT.deployed();
-  // console.log("NuminousNFT deployed to:", NuminousNFT.address);
-
 }
 
 main()

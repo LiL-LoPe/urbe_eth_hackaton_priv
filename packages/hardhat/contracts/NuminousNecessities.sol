@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 import "./SignsNFT.sol";
@@ -6,7 +7,7 @@ import "./NecessitiesToken.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract NuminousNecessities {
+contract NuminousNecessities is Ownable{
 	address coin_address;
 	address nft_address;
 	uint256 private _priceSigns = 0.024 ether;
@@ -19,7 +20,7 @@ contract NuminousNecessities {
 	constructor(
 		string memory nftBaseURI,
 		string memory nftContractURI
-	) {
+	) Ownable(msg.sender) {
 		//SignsNFT.transfer_Ownership(msg.sender);
 		//NecessitiesToken.transfer_Ownership(msg.sender);
 	}
@@ -51,12 +52,12 @@ contract NuminousNecessities {
 		return necessitiesToken.balanceOf(address(this));
 	}
 
-	function withdrawTokens() public {
+	function withdrawTokens() public onlyOwner{
 		uint256 tokenBalance = necessitiesToken.balanceOf(address(this));
 		necessitiesToken.transfer(msg.sender, tokenBalance);
 	}
 
-	function withdrawETH() public {
+	function withdrawETH() public onlyOwner {
 		uint256 contractBalance = address(this).balance;
 		payable(msg.sender).transfer(contractBalance);
 	}
