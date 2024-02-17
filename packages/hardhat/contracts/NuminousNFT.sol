@@ -1,46 +1,104 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.9;
+
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import { IERC2981, IERC165 } from "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
-contract Necessit is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
-    uint256 private _nextTokenId;
+contract NuminousNFT is ERC721, Ownable {
+  using Strings for uint256;
 
-    constructor(address initialOwner)
-        ERC721("Necessit", "MFF")
-        Ownable(initialOwner)
-    {}
+  uint256 constant MAX_SUPPLY = 5000;
+  uint256 private _currentId;
 
-    function _baseURI() internal pure override returns (string memory) {
-        return "https://";
+  string public baseURI;
+  string private _contractURI;
+
+  bool public isActive = false;
+
+  uint256 public price = 0.25 ether;
+
+  bytes32 public merkleRoot;
+  mapping(address => uint256) private _alreadyMinted;
+
+  address public beneficiary;
+  address public royalties;
+
+  constructor(
+    address _beneficiary,
+    address _royalties,
+    string memory _initialBaseURI,
+    string memory _initialContractURI
+  ) ERC721("NuminousNFT", "NMNSNFT") {
+    beneficiary = _beneficiary;
+    royalties = _royalties;
+    baseURI = _initialBaseURI;
+    _contractURI = _initialContractURI;
+  }
+
+  // Accessors
+
+  function setActive(bool _isActive) public onlyOwner {
+    isActive = _isActive;
+  }
+
+  function alreadyMinted(address addr) public view returns (uint256) {
+    return _alreadyMinted[addr];
+  }
+
+  function totalSupply() public view returns (uint256) {
+    return _currentId;
+  }
+
+  // Metadata
+
+  function setBaseURI(string memory uri) public onlyOwner {
+    baseURI = uri;
+  }
+
+  function _baseURI() internal view override returns (string memory) {
+    return baseURI;
+  }
+
+  function contractURI() public view returns (string memory) {
+    return _contractURI;
+  }
+
+  function setContractURI(string memory uri) public onlyOwner {
+    _contractURI = uri;
+  }
+
+  // Minting
+
+    function mint(uint256 amount) public payable {
+    require(isActive, "Minting is not active");
+    require(_currentId + amount <= MAX_SUPPLY, "Will exceed maximum supply");
+    require(msg.value >= price * amount, "Insufficient ether sent");
+
+    for (uint256 i = 1; i <= amount; i++) {
+        _currentId++;
+        _safeMint(msg.sender, _currentId);
     }
 
-    function safeMint(address to, string memory uri) public onlyOwner {
-        uint256 tokenId = _nextTokenId++;
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
-    }
+    _alreadyMinted[msg.sender] += amount;
+}
 
-    // The following functions are overrides required by Solidity.
+  function withdraw() public onlyOwner {
+    payable(beneficiary).transfer(address(this).balance);
+  }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
-        return super.tokenURI(tokenId);
-    }
+  // Private
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
+  function _internalMint(address to, uint256 amount) private {
+    require(_currentId + amount <= MAX_SUPPLY, "Will exceed maximum supply");
+
+    for (uint256 i = 1; i <= amount; i++) {
+      _currentId++;
+      _safeMint(to, _currentId);
     }
+  }
+
 }
