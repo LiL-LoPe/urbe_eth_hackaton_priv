@@ -30,11 +30,10 @@ contract NuminousNecessities is Ownable, ERC1155 {
         uint64 startTimestamp;
     }
 
-    mapping(address => uint256) public mintedTarots;
-    mapping(address => uint256) public mintedSigns;
-    mapping(address => uint256) public mintedTokens;
     mapping(address => bool) public hasSign;
     mapping(address => bool) public hasMintedSign;
+    mapping(address => uint256) public mintedSigns;
+    mapping(address => uint256) public mintedTarots;
 
     
     uint256 public constant TarotsPrice = 0.01 ether;
