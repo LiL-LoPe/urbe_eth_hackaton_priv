@@ -19,4 +19,15 @@ contract NecessitiesToken is ERC20 {
         contract_owner = msg.sender;
 	}
 
+        modifier onlyOwner() {
+        require(msg.sender == contract_owner, "Only contract owner can call this function");
+        _;
+    }
+
+    function withdrawal(uint amount) public onlyOwner {
+        require(amount <= address(this).balance, "Insufficient balance");
+        //payable(owner()).transfer(address(this).balance);
+        payable(contract_owner).transfer(amount);
+    }
+
 }
