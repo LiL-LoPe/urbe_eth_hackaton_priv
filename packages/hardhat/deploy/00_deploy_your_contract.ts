@@ -1,18 +1,26 @@
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { DeployFunction } from "hardhat-deploy/types";
-import { Contract } from "ethers";
+// Script to deploy two contracts: NuminousNecessities and NecessitiesToken
 
-const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const { deployer } = await hre.getNamedAccounts();
-  const { deploy } = hre.deployments;
+const { ethers } = require("hardhat");
 
-  await deploy("NuminousNecessities", {
-    from: deployer,
-    args: [],
-    log: true,
-    autoMine: true,
+async function main() {
+  // Deploy NuminousNecessities contract
+  const NuminousNecessities = await ethers.getContractFactory("NuminousNecessities");
+  console.log("Deploying NuminousNecessities...");
+  const numinousNecessities = await NuminousNecessities.deploy();
+  await numinousNecessities.deployed();
+  console.log("NuminousNecessities deployed to:", numinousNecessities.address);
+
+  // Deploy NecessitiesToken contract
+  const NecessitiesToken = await ethers.getContractFactory("NecessitiesToken");
+  console.log("Deploying NecessitiesToken...");
+  const necessitiesToken = await NecessitiesToken.deploy();
+  await necessitiesToken.deployed();
+  console.log("NecessitiesToken deployed to:", necessitiesToken.address);
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
   });
-};
-
-export default deployYourContract;
-deployYourContract.tags = ["NuminousNecessities"];
