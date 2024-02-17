@@ -8,24 +8,35 @@ contract NuminousNecessities {
     NuminousNFT public numinousNFT;
     NecessitiesToken public necessitiesToken;
 
-    constructor(address _beneficiary, address _royalties, string memory _initialBaseURI, string memory _initialContractURI) {
+    constructor(
+        string memory nftBaseURI,
+        string memory nftContractURI,
+        string memory tokenName,
+        string memory tokenSymbol
+    ) {
         // Deploy the NuminousNFT contract
-        numinousNFT = new NuminousNFT(_beneficiary, _royalties, _initialBaseURI, _initialContractURI);
-        
+        numinousNFT = new NuminousNFT(nftBaseURI, nftContractURI);
+
         // Deploy the NecessitiesToken contract
         necessitiesToken = new NecessitiesToken();
+
+        // Transfer ownership of the NFT contract to this contract
+        numinousNFT.transferOwnership(msg.sender);
+
+        // Transfer ownership of the token contract to this contract
+        necessitiesToken.transferOwnership(msg.sender);
     }
 
     // Mint NFTs and transfer tokens
-    function mintAndTransfer(uint256 numNFTs) public payable {
+    function mintSignAndTransfer(uint256 numNFTs) public payable {
         // Call the mint function in NuminousNFT contract
         numinousNFT.mint{value: msg.value}(numNFTs);
 
         // Call the mint function in NecessitiesToken contract
-        necessitiesToken.mint(numNFTs);
+        necessitiesToken.mint(numNFTs * 100);
 
         // Transfer tokens to the caller
-        necessitiesToken.transfer(msg.sender, numNFTs);
+        necessitiesToken.transfer(msg.sender, numNFTs * 100);
     }
 
     // Retrieve balance of NecessitiesToken

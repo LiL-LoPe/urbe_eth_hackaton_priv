@@ -24,9 +24,6 @@ contract NuminousNFT is ERC721, Ownable {
   bytes32 public merkleRoot;
   mapping(address => uint256) private _alreadyMinted;
 
-  address public beneficiary;
-  address public royalties;
-
   constructor(
     string memory _initialBaseURI,
     string memory _initialContractURI
