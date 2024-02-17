@@ -13,9 +13,10 @@
 	overflow: hidden;
 	transition: transform 0.3s ease;
 	display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 	
 .clothing-item:hover {
@@ -40,4 +41,26 @@
 	
 .clothing-item button:hover {
 	background-color: #0056b3;
+}
+
+.clothing-item {
+	position: relative; /* Per posizionare correttamente il pulsante */
+}
+
+.clothing-item .buy-button {
+	position: absolute;
+	bottom: -40px; /* Posizione iniziale nascosta sopra il contenitore */
+	left: 0;
+	width: 100%;
+	padding: 10px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 0 0 8px 8px;
+	cursor: pointer;
+	transition: bottom 0.3s ease; /* Aggiungi transizione per l'animazione */
+}
+
+.clothing-item:hover .buy-button {
+	bottom: 0; /* Visualizza il pulsante al passaggio del mouse */
 }

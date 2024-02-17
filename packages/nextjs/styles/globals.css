@@ -33,6 +33,7 @@ p {
 	display: block;
 	width: 100%; /* Imposta la larghezza al 100% del contenitore */
 	height: auto; /* Imposta l'altezza in base alla larghezza per mantenere l'aspetto originale */
+	transform: scale(170%);
 }
 
 .gif-image:hover img.img {
