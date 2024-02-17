@@ -5,29 +5,25 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract NecessitiesToken is ERC20 {
-	uint public totalSupply;
-	mapping(address => uint) public balanceOf;
-	mapping(address => mapping(address => uint)) public allowance;
-	string public name = "NecessitiesToken";
-	string public symbol = "NCSSTKN";
-	uint8 public decimals = 20;
-    address contract_owner;
+    address public contractOwner;
+    uint256 public maxSupply;
 
-	constructor() {
-		totalSupply = 4200 * 10 ** uint(decimals);
-		balanceOf[msg.sender] = totalSupply;
-        contract_owner = msg.sender;
-	}
+    constructor() ERC20("NecessitiesToken", "NCSSTKN") {
+        maxSupply = 4200 * 10 ** uint256(decimals());
+        contractOwner = msg.sender;
+    }
 
-        modifier onlyOwner() {
-        require(msg.sender == contract_owner, "Only contract owner can call this function");
+    modifier onlyOwner() {
+        require(msg.sender == contractOwner, "Only contract owner can call this function");
         _;
     }
 
-    function withdrawal(uint amount) public onlyOwner {
-        require(amount <= address(this).balance, "Insufficient balance");
-        //payable(owner()).transfer(address(this).balance);
-        payable(contract_owner).transfer(amount);
+    function mint(address account, uint256 amount) public onlyOwner {
+        require(totalSupply() + amount <= maxSupply, "Exceeds maximum supply");
+        _mint(account, amount);
     }
 
+    function transferOwnership(address newOwner) public onlyOwner {
+        contractOwner = newOwner;
+    }
 }
