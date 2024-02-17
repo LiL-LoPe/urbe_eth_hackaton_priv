@@ -31,6 +31,8 @@ p {
 
 .gif-image:hover img.gif {
 	display: block;
+	width: 100%; /* Imposta la larghezza al 100% del contenitore */
+	height: auto; /* Imposta l'altezza in base alla larghezza per mantenere l'aspetto originale */
 }
 
 .gif-image:hover img.img {

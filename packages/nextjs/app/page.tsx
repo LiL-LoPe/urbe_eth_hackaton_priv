@@ -81,33 +81,33 @@ const Home: NextPage = () => {
 			<div className="landscape-container flex flex-row h-full max-h-screen">
 				{/* Prima parte */}
 				<div className="w-1/3 h-full flex flex-col justify-center items-center relative">
-					<a href="#" onClick={() => handleLinkClick("link1")}>
-						<img src="https://i.ibb.co/6JNK7KF/center.png" alt="center" border="0" />
+					<a href="/shop" onClick={() => handleLinkClick("link1")}>
+						<img src="https://i.ibb.co/6JNK7KF/center.png" alt="center" />
 					</a>
 				</div>
 
 				{/* Seconda parte */}
 				<div className="w-1/3 h-full flex flex-col justify-center items-center relative">
 					<a href="#" onClick={() => handleLinkClick("link2")}>
-						<img src="https://i.ibb.co/yNJNgTv/center.png" alt="magasmall" border="0" />
+						<img src="https://i.ibb.co/yNJNgTv/center.png" alt="magasmall" />
 					</a>
 				</div>
 
 				{/* Terza parte */}
 				<div className="w-1/3 h-full flex flex-col justify-center items-center relative">
 					<a href="#" onClick={() => handleLinkClick("link3")} className="gif-image">
-						<img src="https://i.ibb.co/m588y9s/mage2.png" alt="magasmall" border="0" className="img" />
+						<img src="https://i.ibb.co/m588y9s/mage2.png" alt="magasmall" className="img" />
 						<img src="https://i.ibb.co/1LpJKp8/magegif.gif" alt="Animated GIF" className="gif" />
 					</a>
 					{showTextBox && (
 						<div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-16 p-4">
+							<button onClick={handleDecrement} className="px-3 py-1 mr-2 bg-gray-200 rounded">-</button>
 							<input
 								type="number"
 								value={value}
 								onChange={(e) => setValue(parseInt(e.target.value))}
 								className="w-20 px-2 py-1 mr-2 border border-gray-300 rounded"
 							/>
-							<button onClick={handleDecrement} className="px-3 py-1 mr-2 bg-gray-200 rounded">-</button>
 							<button onClick={handleIncrement} className="px-3 py-1 mr-2 bg-gray-200 rounded">+</button>
 							<button onClick={handleMintSign} className="px-3 py-1 bg-gray-200 rounded">Mint Sign</button>
 						</div>
