@@ -13,7 +13,7 @@ contract SignsNFT is ERC721, Ownable {
 	uint256 private max_supply = 48;
 	//uint256 private _reserved = 100;
 	//uint256 private _priceSigns = 0.024 ether;
-	address contract_Owner;
+	//address contract_Owner;
 
 	constructor(
 		string memory baseURI
@@ -34,11 +34,11 @@ contract SignsNFT is ERC721, Ownable {
 		}
 	}
 
-	function transfer_Ownership(address newOwner) external onlyOwner {
-    	require(newOwner != address(0), "Invalid address");
-    	require(msg.sender == contract_Owner, "Only contract owner can call this function");
-    contract_Owner = newOwner;
-	}
+	//function transfer_Ownership(address newOwner) external onlyOwner {
+    //	require(newOwner != address(0), "Invalid address");
+    //	require(msg.sender == contract_Owner, "Only contract owner can call this function");
+    //	contract_Owner = newOwner;
+	//}
 
 	function _baseURI() internal view virtual override returns (string memory) {
 		return _baseTokenURI;

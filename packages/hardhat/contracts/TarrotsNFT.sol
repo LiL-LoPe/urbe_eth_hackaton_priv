@@ -13,13 +13,13 @@ contract TarrotsNFT is ERC721, Ownable {
 	uint256 private max_supply = 4200;
 	//uint256 private _reserved = 4200;
 	//uint256 private _priceTarrots = 0.012 ether;
-	address contract_Owner;
+	//address contract_Owner;
 
 	constructor(
 		string memory baseURI
 	) ERC721("Tarrots", "TRRTNFT") Ownable(msg.sender) {
 		setBaseURI(baseURI);
-		contract_Owner = msg.sender;
+
 	}
 
 	function mintTarrots(uint256 num) external onlyOwner{
@@ -34,11 +34,11 @@ contract TarrotsNFT is ERC721, Ownable {
 		}
 	}
 
-	function transfer_Ownership(address newOwner) public onlyOwner {
-    	require(newOwner != address(0), "Invalid address");
-    	require(msg.sender == contract_Owner, "Only contract owner can call this function");
-    	contract_Owner = newOwner;
-	}
+	//function transfer_Ownership(address newOwner) public onlyOwner {
+    //	require(newOwner != address(0), "Invalid address");
+    //	require(msg.sender == contract_Owner, "Only contract owner can call this function");
+    //	contract_Owner = newOwner;
+	//}
 
 	function _baseURI() internal view virtual override returns (string memory) {
 		return _baseTokenURI;
