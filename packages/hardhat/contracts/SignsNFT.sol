@@ -35,7 +35,9 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 	}
 
 	function transfer_Ownership(address newOwner) external onlyOwner {
-		contract_Owner = newOwner;
+    	require(newOwner != address(0), "Invalid address");
+    	require(msg.sender == contract_Owner, "Only contract owner can call this function");
+    contract_Owner = newOwner;
 	}
 
 	function _baseURI() internal view virtual override returns (string memory) {

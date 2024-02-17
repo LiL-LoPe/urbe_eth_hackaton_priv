@@ -17,13 +17,13 @@ contract NuminousNecessities {
 	constructor(
 		string memory nftBaseURI,
 		string memory nftContractURI,
-		string memory tokenName,
-		string memory tokenSymbol
+		//string memory tokenName,
+		//string memory tokenSymbol
 	) {
-		numinousNFT = new NuminousNFT(nftBaseURI /*, nftContractURI*/);
-		necessitiesToken = new NecessitiesToken();
-		numinousNFT.transferOwnership(msg.sender);
-		necessitiesToken.transferOwnership(msg.sender);
+		//numinousNFT = new NuminousNFT(nftBaseURI /*, nftContractURI*/);
+		//necessitiesToken = new NecessitiesToken();
+		numinousNFT.transfer_Ownership(msg.sender);
+		necessitiesToken.transfer_Ownership(msg.sender);
 	}
 
 	function mintSignsAndTransfer(uint256 numNFTs) public payable {
@@ -53,4 +53,13 @@ contract NuminousNecessities {
 		uint256 contractBalance = address(this).balance;
 		payable(msg.sender).transfer(contractBalance);
 	}
+    
+    function transferOwnershipOfContracts(address newOwner) public {
+    require(msg.sender == owner(), "Only contract owner can call this function");
+    
+    numinousNFT.transferOwnership(newOwner);
+    necessitiesToken.transferOwnership(newOwner);
+    signsNFT.transferOwnership(newOwner);
+    tarrotsNFT.transferOwnership(newOwner);
+}
 }

@@ -23,7 +23,9 @@ contract NecessitiesToken is ERC20 {
         _mint(account, amount);
     }
 
-    function transferOwnership(address newOwner) public onlyOwner {
-        contractOwner = newOwner;
-    }
+	function transfer_Ownership(address newOwner) external onlyOwner {
+    	require(newOwner != address(0), "Invalid address");
+    	require(msg.sender == contract_Owner, "Only contract owner can call this function");
+    contract_Owner = newOwner;
+	}
 }
