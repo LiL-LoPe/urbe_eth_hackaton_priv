@@ -28,13 +28,9 @@ contract NuminousNFT is ERC721, Ownable {
   address public royalties;
 
   constructor(
-    address _beneficiary,
-    address _royalties,
     string memory _initialBaseURI,
     string memory _initialContractURI
   ) ERC721("NuminousNFT", "NMNSNFT") {
-    beneficiary = _beneficiary;
-    royalties = _royalties;
     baseURI = _initialBaseURI;
     _contractURI = _initialContractURI;
   }
