@@ -5,9 +5,9 @@ import "./SignsNFT.sol";
 import "./TarrotsNFT.sol";
 import "./NecessitiesToken.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract NuminousNecessities {
-	NuminousNFT public numinousNFT;
 	NecessitiesToken public necessitiesToken;
 	address coin_address;
 	address nft_address;
@@ -16,28 +16,24 @@ contract NuminousNecessities {
 
 	constructor(
 		string memory nftBaseURI,
-		string memory nftContractURI,
-		//string memory tokenName,
-		//string memory tokenSymbol
+		string memory nftContractURI
 	) {
-		//numinousNFT = new NuminousNFT(nftBaseURI /*, nftContractURI*/);
-		//necessitiesToken = new NecessitiesToken();
-		numinousNFT.transfer_Ownership(msg.sender);
+		SignsNFT.transfer_Ownership(msg.sender);
 		necessitiesToken.transfer_Ownership(msg.sender);
 	}
 
 	function mintSignsAndTransfer(uint256 numNFTs) public payable {
-		uint256 mintPrice = _priceSigns * num;
+		uint256 mintPrice = _priceSigns * numNFTs;
 		require(msg.value != mintPrice, "Ether sent is not correct");
-		numinousNFT.mintSigns{ value: msg.value }(numNFTs);
-		necessitiesToken._mint(numNFTs * 100);
+		SignsNFT.mintSigns{ value: msg.value }(numNFTs);
+		necessitiesToken._mint(msg.sender, numNFTs * 100);
 		necessitiesToken.transfer(msg.sender, numNFTs * 100);
 	}
 
 	function mintTarrots(uint256 numNFTs) public payable {
-		uint256 mintPrice = _priceTarrots * num;
+		uint256 mintPrice = _priceTarrots * numNFTs;
 		require(msg.value != mintPrice, "Ether sent is not correct");
-		numinousNFT.mintTarrots{ value: msg.value }(numNFTs);
+		SignsNFT.mintTarrots{ value: msg.value }(numNFTs);
 	}
 
 	function getNecessitiesTokenBalance() public view returns (uint256) {
@@ -53,13 +49,4 @@ contract NuminousNecessities {
 		uint256 contractBalance = address(this).balance;
 		payable(msg.sender).transfer(contractBalance);
 	}
-    
-    function transferOwnershipOfContracts(address newOwner) public {
-    require(msg.sender == owner(), "Only contract owner can call this function");
-    
-    numinousNFT.transferOwnership(newOwner);
-    necessitiesToken.transferOwnership(newOwner);
-    signsNFT.transferOwnership(newOwner);
-    tarrotsNFT.transferOwnership(newOwner);
-}
 }

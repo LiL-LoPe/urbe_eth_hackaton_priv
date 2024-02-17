@@ -2,11 +2,11 @@
 pragma solidity ^0.8.20;
 
 import "hardhat/console.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract SignsNFT is ERC721Enumerable, Ownable {
+contract SignsNFT is ERC721, Ownable {
 	using Strings for uint256;
 
 	string _baseTokenURI;

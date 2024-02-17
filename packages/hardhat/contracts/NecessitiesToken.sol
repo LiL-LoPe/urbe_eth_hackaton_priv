@@ -5,27 +5,33 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract NecessitiesToken is ERC20 {
-    address public contractOwner;
-    uint256 public maxSupply;
+	address public contractOwner;
+	uint256 public maxSupply;
 
-    constructor() ERC20("NecessitiesToken", "NCSSTKN") {
-        maxSupply = 4200 * 10 ** uint256(decimals());
-        contractOwner = msg.sender;
-    }
+	constructor() ERC20("NecessitiesToken", "NCSSTKN") {
+		maxSupply = 4200 * 10 ** uint256(decimals());
+		contractOwner = msg.sender;
+	}
 
-    modifier onlyOwner() {
-        require(msg.sender == contractOwner, "Only contract owner can call this function");
-        _;
-    }
+	modifier onlyOwner() {
+		require(
+			msg.sender == contractOwner,
+			"Only contract owner can call this function"
+		);
+		_;
+	}
 
-    function mint(address account, uint256 amount) public onlyOwner {
-        require(totalSupply() + amount <= maxSupply, "Exceeds maximum supply");
-        _mint(account, amount);
-    }
+	function mint(address account, uint256 amount) external onlyOwner {
+		require(totalSupply() + amount <= maxSupply, "Exceeds maximum supply");
+		_mint(account, amount);
+	}
 
 	function transfer_Ownership(address newOwner) external onlyOwner {
-    	require(newOwner != address(0), "Invalid address");
-    	require(msg.sender == contract_Owner, "Only contract owner can call this function");
-    contract_Owner = newOwner;
+		require(newOwner != address(0), "Invalid address");
+		require(
+			msg.sender == contract_Owner,
+			"Only contract owner can call this function"
+		);
+		contract_Owner = newOwner;
 	}
 }

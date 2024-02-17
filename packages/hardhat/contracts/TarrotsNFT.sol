@@ -2,11 +2,11 @@
 pragma solidity ^0.8.20;
 
 import "hardhat/console.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract TarrotsNFT is ERC721Enumerable, Ownable {
+contract TarrotsNFT is ERC721, Ownable {
 	using Strings for uint256;
 
 	string _baseTokenURI;
@@ -34,10 +34,10 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 		}
 	}
 
-	function transfer_Ownership(address newOwner) external onlyOwner {
+	function transfer_Ownership(address newOwner) public onlyOwner {
     	require(newOwner != address(0), "Invalid address");
     	require(msg.sender == contract_Owner, "Only contract owner can call this function");
-    contract_Owner = newOwner;
+    	contract_Owner = newOwner;
 	}
 
 	function _baseURI() internal view virtual override returns (string memory) {
