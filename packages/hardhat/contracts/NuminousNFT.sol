@@ -3,92 +3,154 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import { IERC2981, IERC165 } from "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
-contract NuminousNFT is ERC721, Ownable {
+contract NuminousNFT is Ownable {
     using Strings for uint256;
 
-    uint256 constant MAX_SUPPLY = 5000;
-    uint256 private _currentId;
+    uint256 constant MAX_SUPPLY_NUMINOUS = 5000;
+    uint256 private _currentIdNuminous;
+	string public baseURINuminous;
+	string private _contractURINuminous;
+    bool public isActiveNuminous = false;
+    uint256 public priceNuminous = 0.25 ether;
+    mapping(address => uint256) private _alreadyMintedNuminous;
 
-    string public baseURI;
-    string private _contractURI;
 
-    bool public isActive = false;
-
-    uint256 public price = 0.25 ether;
-
-    mapping(address => uint256) private _alreadyMinted;
+    uint256 constant MAX_SUPPLY_TARROCHI = 3000;
+    uint256 private _currentIdTarrochi;
+    string public baseURITarrochi;
+    string private _contractURITarrochi;
+    bool public isActiveTarrochi = false;
+    uint256 public priceTarrochi = 0.1 ether;
+    mapping(address => uint256) private _alreadyMintedTarrochi;
 
     constructor(
-        string memory _initialBaseURI,
-        string memory _initialContractURI
-    ) ERC721("NuminousNFT", "NMNSNFT") {
-        baseURI = _initialBaseURI;
-        _contractURI = _initialContractURI;
+        string memory _initialBaseURINuminous,
+        string memory _initialContractURINuminous,
+
+        string memory _initialBaseURITarrochi,
+        string memory _initialContractURITarrochi
+    ) {
+        baseURINuminous = _initialBaseURINuminous;
+        _contractURINuminous = _initialContractURINuminous;
+
+        baseURITarrochi = _initialBaseURITarrochi;
+        _contractURITarrochi = _initialContractURITarrochi;
     }
 
     // Accessors
 
-    function setActive(bool _isActive) public onlyOwner {
-        isActive = _isActive;
+    function setActiveNuminous(bool _isActive) public onlyOwner {
+        isActiveNuminous = _isActive;
     }
 
-    function alreadyMinted(address addr) public view returns (uint256) {
-        return _alreadyMinted[addr];
+    function alreadyMintedNuminous(address addr) public view returns (uint256) {
+        return _alreadyMintedNuminous[addr];
     }
 
-    function totalSupply() public view returns (uint256) {
-        return _currentId;
+	function totalSupplyNuminous() public view returns (uint256) {
+    	return _currentIdNuminous;
+    }
+
+
+    function setActiveTarrochi(bool _isActive) public onlyOwner {
+        isActiveTarrochi = _isActive;
+    }
+	
+    function alreadyMintedTarrochi(address addr) public view returns (uint256) {
+        return _alreadyMintedTarrochi[addr];
+    }
+
+    function totalSupplyTarrochi() public view returns (uint256) {
+        return _currentIdTarrochi;
     }
 
     // Metadata
 
-    function setBaseURI(string memory uri) public onlyOwner {
-        baseURI = uri;
+    function setBaseURINuminous(string memory uri) public onlyOwner {
+        baseURINuminous = uri;
     }
 
-    function _baseURI() internal view override returns (string memory) {
-        return baseURI;
+    function _baseURINuminous() internal view returns (string memory) {
+        return baseURINuminous;
     }
 
-    function contractURI() public view returns (string memory) {
-        return _contractURI;
+    function contractURINuminous() public view returns (string memory) {
+        return _contractURINuminous;
     }
 
-    function setContractURI(string memory uri) public onlyOwner {
-        _contractURI = uri;
+    function setContractURINuminous(string memory uri) public onlyOwner {
+        _contractURINuminous = uri;
+    }
+
+
+    function setBaseURITarrochi(string memory uri) public onlyOwner {
+        baseURITarrochi = uri;
+    }
+
+    function _baseURITarrochi() internal view returns (string memory) {
+        return baseURITarrochi;
+    }
+
+    function contractURITarrochi() public view returns (string memory) {
+        return _contractURITarrochi;
+    }
+
+    function setContractURITarrochi(string memory uri) public onlyOwner {
+        _contractURITarrochi = uri;
     }
 
     // Minting
 
-    function mint(uint256 amount) public payable {
-        require(isActive, "Minting is not active");
-        require(_currentId + amount <= MAX_SUPPLY, "Will exceed maximum supply");
-        require(msg.value >= price * amount, "Insufficient ether sent");
+    function mintNuminous(uint256 amount) public payable {
+        require(isActiveNuminous, "Numinous minting is not active");
+        require(_currentIdNuminous + amount <= MAX_SUPPLY_NUMINOUS, "Numinous will exceed maximum supply");
+        require(msg.value >= priceNuminous * amount, "Insufficient ether sent for Numinous");
 
         for (uint256 i = 1; i <= amount; i++) {
-            _currentId++;
-            _safeMint(msg.sender, _currentId);
+            _currentIdNuminous++;
+            _safeMint(msg.sender, _currentIdNuminous);
         }
 
-        _alreadyMinted[msg.sender] += amount;
+        _alreadyMintedNuminous[msg.sender] += amount;
+    }
+
+    function mintTarrochi(uint256 amount) public payable {
+        require(isActiveTarrochi, "Tarrochi minting is not active");
+        require(_currentIdTarrochi + amount <= MAX_SUPPLY_TARROCHI, "Tarrochi will exceed maximum supply");
+        require(msg.value >= priceTarrochi * amount, "Insufficient ether sent for Tarrochi");
+
+        for (uint256 i = 1; i <= amount; i++) {
+            _currentIdTarrochi++;
+            _safeMint(msg.sender, _currentIdTarrochi);
+        }
+
+        _alreadyMintedTarrochi[msg.sender] += amount;
     }
 
     function withdraw() public onlyOwner {
         payable(owner()).transfer(address(this).balance);
     }
 
-    // Private
+  // Private
 
-    function _internalMint(address to, uint256 amount) private {
-        require(_currentId + amount <= MAX_SUPPLY, "Will exceed maximum supply");
+    function _devMintNuminous(address to, uint256 amount) private {
+        require(_currentIdNuminous + amount <= MAX_SUPPLY_NUMINOUS, "Numinous will exceed maximum supply");
 
         for (uint256 i = 1; i <= amount; i++) {
-            _currentId++;
-            _safeMint(to, _currentId);
+            _currentIdNuminous++;
+            _safeMint(to, _currentIdNuminous);
+        }
+    }
+	
+	function _devMintTarrochi(address to, uint256 amount) private {
+  		require(_currentIdTarrochi + amount <= MAX_SUPPLY_TARROCHI, "Tarrochi will exceed maximum supply");
+
+        for (uint256 i = 1; i <= amount; i++) {
+            _currentIdTarrochi++;
+            _safeMint(to, _currentIdTarrochi);
         }
     }
 }
+
