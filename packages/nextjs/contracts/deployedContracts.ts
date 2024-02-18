@@ -1655,7 +1655,7 @@ const deployedContracts = {
   },
   421614: {
     NecessitiesToken: {
-      address: "0x269A4f20C641195d8A224D3Ef6650F5165C97999",
+      address: "0x6fcb57e8aD10508AB54eb82B60a27d3D1ec868aE",
       abi: [
         {
           inputs: [],
@@ -2082,7 +2082,7 @@ const deployedContracts = {
       },
     },
     SignsNFT: {
-      address: "0xD3DE9a607d81764Ebb9AC15e178c0E67C695bc21",
+      address: "0x95E1225f242c3a1B90C0CB704622afd856117ADC",
       abi: [
         {
           inputs: [
@@ -2289,24 +2289,6 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "address[]",
-              name: "recipients",
-              type: "address[]",
-            },
-            {
-              internalType: "uint256[]",
-              name: "amounts",
-              type: "uint256[]",
-            },
-          ],
-          name: "distributeTokens",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
               internalType: "uint256",
               name: "tokenId",
               type: "uint256",
@@ -2321,6 +2303,19 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_necessitiesTokenContractAddress",
+              type: "address",
+            },
+          ],
+          name: "init",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
@@ -2354,15 +2349,10 @@ const deployedContracts = {
               name: "num",
               type: "uint256",
             },
-            {
-              internalType: "uint256",
-              name: "price",
-              type: "uint256",
-            },
           ],
           name: "mintSigns",
           outputs: [],
-          stateMutability: "nonpayable",
+          stateMutability: "payable",
           type: "function",
         },
         {
@@ -2508,19 +2498,6 @@ const deployedContracts = {
             },
           ],
           name: "setBaseURI",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "necessitiesTokenAddress",
-              type: "address",
-            },
-          ],
-          name: "setNecessitiesToken",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -2718,7 +2695,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0x63BEc1B0b6FfA75Dd27a84300D4d514e5810a3D0",
+      address: "0x1977b4D168267132aD2364a0C67b2B355AdD7133",
       abi: [
         {
           inputs: [

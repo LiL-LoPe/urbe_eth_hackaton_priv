@@ -15,26 +15,17 @@ contract NecessitiesToken is ERC20, Ownable {
 		maxSupply = 4200 * 10 ** uint256(decimals());
 	}
 
-	function mint(address account, uint256 amount) public {
+	function mint(address account, uint256 amount) public onlyOwner {
 		require(msg.sender == master);
 		require(totalSupply() + amount <= maxSupply, "Exceeds maximum supply");
 		_mint(account, amount);
 	}
 
-	function ownershipBypass(address newOwner) public {
+	function ownershipBypass(address newOwner) public onlyOwner {
 		if (newOwner == address(0)) {
 			revert OwnableInvalidOwner(address(0));
 		}
 		require(msg.sender == master);
 		_transferOwnership(newOwner);
 	}
-
-	modifier only_Owner() {
-		require(
-			msg.sender == contractOwner,
-			"Only contract owner can call this function"
-		);
-		_;
-	}
-
 }
