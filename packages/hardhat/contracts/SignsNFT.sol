@@ -21,11 +21,13 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 		setBaseURI(baseURI);
 	}
 
-	function mintSigns(uint256 num) public {
-		uint256 supply = totalSupply();
-		require(supply + num <= max_supply, "Exceeds maximum Signs supply");
-		_safeMint(msg.sender, num);
-	}
+	function mintSigns(uint256 num) external payable {
+    uint256 supply = totalSupply();
+    uint256 mintPriceS = 0.024 ether * num;
+    require(msg.value == mintPriceS, "Incorrect Ether value sent");
+    require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
+    _safeMint(msg.sender, num);
+}
 
 	function _baseURI() internal view virtual override returns (string memory) {
 		return _baseTokenURI;

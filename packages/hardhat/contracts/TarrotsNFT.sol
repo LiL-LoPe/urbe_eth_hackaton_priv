@@ -22,9 +22,11 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 	}
 
 	function mintTarrots(uint256 num) external payable {
-    	uint256 supply = totalSupply();
-    	require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
-    	_safeMint(msg.sender, num);
+    uint256 supply = totalSupply();
+    uint256 mintPriceT = 0.012 ether * num;
+    require(msg.value == mintPriceT, "Incorrect Ether value sent");
+    require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
+    _safeMint(msg.sender, num);
 }
 
 	function _baseURI() internal view virtual override returns (string memory) {
