@@ -3,31 +3,34 @@ pragma solidity ^0.8.20;
 
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract NecessitiesToken is ERC20 {
-	uint public totalSupply;
-	mapping(address => uint) public balanceOf;
-	mapping(address => mapping(address => uint)) public allowance;
-	string public name = "NecessitiesToken";
-	string public symbol = "NCSSTKN";
-	uint8 public decimals = 20;
-    address contract_owner;
+contract NecessitiesToken is ERC20, Ownable {
+	address public contractOwner;
+	uint256 public maxSupply;
 
-	constructor() {
-		totalSupply = 4200 * 10 ** uint(decimals);
-		balanceOf[msg.sender] = totalSupply;
-        contract_owner = msg.sender;
+	constructor() ERC20("NecessitiesToken", "NCSSTKN") Ownable(msg.sender){
+		maxSupply = 4200 * 10 ** uint256(decimals());
 	}
 
-        modifier onlyOwner() {
-        require(msg.sender == contract_owner, "Only contract owner can call this function");
-        _;
-    }
+	function mint(address account, uint256 amount) external onlyOwner {
+		require(totalSupply() + amount <= maxSupply, "Exceeds maximum supply");
+		_mint(account, amount);
+	}
 
-    function withdrawal(uint amount) public onlyOwner {
-        require(amount <= address(this).balance, "Insufficient balance");
-        //payable(owner()).transfer(address(this).balance);
-        payable(contract_owner).transfer(amount);
-    }
-
+	//modifier onlyOwner() {
+	//	require(
+	//		msg.sender == contractOwner,
+	//		"Only contract owner can call this function"
+	//	);
+	//	_;
+	//}
+	//function transferOwnership(address newOwner) external onlyOwner {
+	//	require(newOwner != address(0), "Invalid address");
+	//	require(
+	//		msg.sender == contract_Owner,
+	//		"Only contract owner can call this function"
+	//);
+	// 	contract_Owner = newOwner;
+	// }
 }
