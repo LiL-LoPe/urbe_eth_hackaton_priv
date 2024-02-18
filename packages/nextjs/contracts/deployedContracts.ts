@@ -1655,7 +1655,7 @@ const deployedContracts = {
   },
   421614: {
     NecessitiesToken: {
-      address: "0x6aE12cD9F6C33261e37D06C1e7C9952a155f6Af8",
+      address: "0x269A4f20C641195d8A224D3Ef6650F5165C97999",
       abi: [
         {
           inputs: [],
@@ -2082,7 +2082,7 @@ const deployedContracts = {
       },
     },
     SignsNFT: {
-      address: "0x318e35db772F052c16Ad7f986dd672b4744Fa054",
+      address: "0xD3DE9a607d81764Ebb9AC15e178c0E67C695bc21",
       abi: [
         {
           inputs: [
@@ -2718,7 +2718,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0x4985f05de6829B21dCB42BE20ce6dab7181110EB",
+      address: "0x63BEc1B0b6FfA75Dd27a84300D4d514e5810a3D0",
       abi: [
         {
           inputs: [

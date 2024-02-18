@@ -41,14 +41,14 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
   // Deploy SignsNFT
   await deploy("SignsNFT", {
     from: deployer,
-    args: ["wWECWRVQWTBYENURYMJ"],
+    args: ["https://ibb.co/k8gZ8Pg"],
     log: true,
   });
 
   // Deploy TarrotsNFT
   await deploy("TarrotsNFT", {
     from: deployer,
-    args: ["xECWTBYEHNJRYM",],
+    args: ["https://ibb.co/mHDZyzD"],
     log: true,
   });
 

@@ -21,11 +21,6 @@ contract NecessitiesToken is ERC20, Ownable {
 		_mint(account, amount);
 	}
 
-	//function setaddresssign(address manual) public {
-	//	require(msg.sender == master);
-	//	signaddres = manual;
-	//}
-
 	function ownershipBypass(address newOwner) public {
 		if (newOwner == address(0)) {
 			revert OwnableInvalidOwner(address(0));
@@ -34,18 +29,6 @@ contract NecessitiesToken is ERC20, Ownable {
 		_transferOwnership(newOwner);
 	}
 
-	//function transferTokensToSignsNFT(
-	//	address signsNFTContract,
-	//	uint256 amount
-	//) external {
-	//	require(
-	//		signsNFTContract != address(0),
-	//		"Invalid SignsNFT contract address"
-	//	);
-	//	require(amount <= balanceOf(address(this)), "Insufficient balance");
-	//	_transfer(address(this), signsNFTContract, amount);
-	//}
-
 	modifier only_Owner() {
 		require(
 			msg.sender == contractOwner,
@@ -53,12 +36,5 @@ contract NecessitiesToken is ERC20, Ownable {
 		);
 		_;
 	}
-	//function transferOwnership(address newOwner) external onlyOwner {
-	//	require(newOwner != address(0), "Invalid address");
-	//	require(
-	//		msg.sender == contract_Owner,
-	//		"Only contract owner can call this function"
-	//);
-	// 	contract_Owner = newOwner;
-	// }
+
 }
