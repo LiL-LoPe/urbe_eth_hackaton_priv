@@ -48,7 +48,7 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
   // Deploy TarrotsNFT
   await deploy("TarrotsNFT", {
     from: deployer,
-    args: ["xECWTBYEHNJRYM"],
+    args: ["xECWTBYEHNJRYM",],
     log: true,
   });
 

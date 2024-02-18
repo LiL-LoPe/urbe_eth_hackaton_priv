@@ -1586,7 +1586,7 @@ const deployedContracts = {
   },
   421614: {
     NecessitiesToken: {
-      address: "0x60276408BFB00b487CD4a791eE142dBA429993C4",
+      address: "0x45C5A26874e52f65Ae9634182a8136DA02172442",
       abi: [
         {
           inputs: [],
@@ -2013,7 +2013,7 @@ const deployedContracts = {
       },
     },
     SignsNFT: {
-      address: "0x3c7B7ffF36898fC7abF76DBEDf6648C274D33C0C",
+      address: "0xD6A78EcB20B512F59481f077A4e681B9DD834E28",
       abi: [
         {
           inputs: [
@@ -2169,6 +2169,25 @@ const deployedContracts = {
             },
           ],
           name: "balanceOf",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOfNFT",
           outputs: [
             {
               internalType: "uint256",
@@ -2588,7 +2607,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0x9d21Ca668cD104702917C458dc5A1Add9807762C",
+      address: "0x290FF09E163f949d3D6af401d388797455C13Dd9",
       abi: [
         {
           inputs: [
@@ -2774,6 +2793,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "num",
+              type: "uint256",
+            },
+          ],
+          name: "buyShirt",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [],
           name: "contractOwner",
           outputs: [
@@ -2857,6 +2889,19 @@ const deployedContracts = {
         },
         {
           inputs: [],
+          name: "necessitiesToken",
+          outputs: [
+            {
+              internalType: "contract NecessitiesToken",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
           name: "owner",
           outputs: [
             {
@@ -2885,19 +2930,6 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "ownershipBypass",
-          outputs: [],
-          stateMutability: "nonpayable",
           type: "function",
         },
         {
@@ -2954,6 +2986,19 @@ const deployedContracts = {
             },
           ],
           name: "safeTransferFrom",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_addressnecessitiesToken",
+              type: "address",
+            },
+          ],
+          name: "setAddressToken",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",

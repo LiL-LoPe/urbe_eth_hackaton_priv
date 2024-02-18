@@ -10,7 +10,7 @@ contract NecessitiesToken is ERC20, Ownable {
 	uint256 public maxSupply;
 	address master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
 
-	constructor() ERC20("NecessitiesToken", "NCSSTKN") Ownable(msg.sender){
+	constructor() ERC20("NecessitiesToken", "NCSSTKN") Ownable(master){
 		maxSupply = 4200 * 10 ** uint256(decimals());
 	}
 
