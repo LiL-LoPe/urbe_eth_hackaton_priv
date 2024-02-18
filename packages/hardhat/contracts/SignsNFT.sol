@@ -14,9 +14,6 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 	address public contractOwner;
 	uint256 private max_supply = 48;
 	address master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
-	mapping(uint256 => bool) public burnedTokens;
-
-	event ShirtClaimed(address indexed user, uint256 indexed tokenId);
 
 	constructor(
 		string memory baseURI
@@ -57,15 +54,6 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 		require(account != address(0), "Invalid address");
 		return balanceOf(account);
 	}
-
-	function claimShirt(uint256 tokenId) external payable {
-        //require(nftContract.ownerOf(tokenId) == msg.sender, "You do not own this token");
-        // Burn the NFT
-        //nftContract.transferFrom(msg.sender, address(0), tokenId);
-        // Transfer funds to the contract owner
-        payable(owner()).transfer(msg.value);
-        emit ShirtClaimed(msg.sender, tokenId);
-    }
 
 	// modifier only_Owner() {
 	//     require(msg.sender == contractOwner, "Only contract owner can call this function");
