@@ -53,8 +53,15 @@ const Home: NextPage = () => {
 	const { writeAsync: mintSign } = useScaffoldContractWrite({
 		contractName: "NuminousNecessities",
 		functionName: "mintSign",
-		args: [valueSign],
+		args: [BigInt(valueSign)],
 	});
+
+	const { writeAsync: mintTarrots } = useScaffoldContractWrite({
+		contractName: "TarrotsNFT",
+		functionName: "mintTarrots",
+		args: [BigInt(valueSign)],
+	});
+
 	// Stato per indicare se il minting è in corso
 	const [isMinting, setIsMinting] = useState(false);
 	// Funzione per gestire il minting dell'NFT
@@ -66,6 +73,22 @@ const Home: NextPage = () => {
 		try {
 			setIsMinting(true); // Imposta lo stato del minting su true per indicare che il minting è in corso
 			await mintSign();
+			// Una volta completato il minting, reimposta lo stato del minting su false
+			setIsMinting(false);
+		} catch (error) {
+			console.error("Errore durante il minting:", error);
+			setIsMinting(false); // Assicurati di reimpostare lo stato del minting su false in caso di errore
+		}
+	};
+
+	const handleMintTarrot = async () => {
+		if (valueSign > 2) {
+			// Visualizzare un messaggio di errore
+			console.log("Error: you can only mint two.");
+		}
+		try {
+			setIsMinting(true); // Imposta lo stato del minting su true per indicare che il minting è in corso
+			await mintTarrots();
 			// Una volta completato il minting, reimposta lo stato del minting su false
 			setIsMinting(false);
 		} catch (error) {
@@ -103,11 +126,11 @@ const Home: NextPage = () => {
 						<div className="mask fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
 							<div className="mask-content bg-white p-8 rounded-lg relative">
 								<button className="close-button absolute top-2 right-2" onClick={handleCloseMask}>X</button>
-								<h2 className="text-2xl mb-4">Titolo della maschera</h2>
+								<h2 className="text-2xl mb-4">Alchemic Table</h2>
 								{/* Contenuto della maschera */}
 								<button className="button bg-blue-500 text-white px-4 py-2 rounded mr-2">Azione 1</button>
 								<button className="button bg-blue-500 text-white px-4 py-2 rounded mr-2">Azione 2</button>
-								<button className="button bg-blue-500 text-white px-4 py-2 rounded">Azione 3</button>
+								<button onClick={handleMintTarrot} className="button bg-blue-500 text-white px-4 py-2 rounded">Mint Tarrots</button>
 							</div>
 						</div>
 					)}
