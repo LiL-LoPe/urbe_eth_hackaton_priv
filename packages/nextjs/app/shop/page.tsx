@@ -4,7 +4,6 @@ import "./shop.css";
 import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import Image from "next/image";
 import { Address, AddressInput, Balance } from "~~/components/scaffold-eth";
 import { NFTCard } from "~~/components/NFTCard";
 import {

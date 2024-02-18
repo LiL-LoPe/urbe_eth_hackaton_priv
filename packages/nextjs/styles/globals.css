@@ -22,20 +22,3 @@ h4 {
 p {
 	margin: 1rem 0;
 }
-
-.gif-image img.gif {
-	display: none;
-	width: 100%; /* Imposta la larghezza al 100% del contenitore */
-	height: auto; /* Imposta l'altezza in base alla larghezza per mantenere l'aspetto originale */
-}
-
-.gif-image:hover img.gif {
-	display: block;
-	width: 100%; /* Imposta la larghezza al 100% del contenitore */
-	height: auto; /* Imposta l'altezza in base alla larghezza per mantenere l'aspetto originale */
-	transform: scale(170%);
-}
-
-.gif-image:hover img.img {
-  display: none; /* Nasconde l'immagine PNG quando il mouse ci passa sopra */
-}

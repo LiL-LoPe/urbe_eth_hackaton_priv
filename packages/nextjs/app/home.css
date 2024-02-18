@@ -1,0 +1,85 @@
+.gif-image img.gif {
+	display: none;
+	width: 100%; /* Imposta la larghezza al 100% del contenitore */
+	height: auto; /* Imposta l'altezza in base alla larghezza per mantenere l'aspetto originale */
+}
+
+.gif-image:hover img.gif {
+	display: block;
+	width: 100%; /* Imposta la larghezza al 100% del contenitore */
+	height: auto; /* Imposta l'altezza in base alla larghezza per mantenere l'aspetto originale */
+	transform: scale(180%);
+}
+
+.gif-image:hover img.img {
+  display: none; /* Nasconde l'immagine PNG quando il mouse ci passa sopra */
+}
+
+/* Stile per la maschera */
+.mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Sfondo semitrasparente */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+	
+.mask-content {
+	background-color: #3dc8ff63; /* Colore di sfondo */
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ombra */
+	position: relative;
+}
+	
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 30px; /* Altezza e larghezza quadrate */
+	height: 30px;
+	background-color: #ff4d4d; /* Colore di sfondo rossiccio */
+	border: none;
+	color: #ffffff; /* Colore del testo bianco */
+	font-size: 20px;
+	line-height: 30px; /* Centrare la X verticalmente */
+	text-align: center; /* Centrare la X orizzontalmente */
+	cursor: pointer;
+	border-radius: 5px; /* Bordi arrotondati */
+}
+	
+.close-button:hover {
+		background-color: #e60000; /* Cambio di colore al passaggio del mouse */
+}
+	
+
+	/* Stile per i tasti */
+.button {
+	background-color: #007bff; /* Colore di sfondo */
+	color: #ffffff; /* Colore del testo */
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-right: 10px;
+	transition: background-color 0.3s ease; /* Transizione del colore di sfondo */
+}
+	
+.button:hover {
+	background-color: #0056b3; /* Cambia colore di sfondo al passaggio del mouse */
+}
+
+.fire {
+	margin-top: -100px;
+	padding-top: 300px;
+	scale: 150%;
+}
+
+.fire:hover {
+	padding-top: 280px;
+	scale: 160%;
+}
