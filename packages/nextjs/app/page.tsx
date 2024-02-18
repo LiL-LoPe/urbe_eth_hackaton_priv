@@ -21,6 +21,7 @@ const Home: NextPage = () => {
 	const [valueSign, setValueSign] = useState(0);
 	const [showMask, setShowMask] = useState(false);
 	const [isMinting, setIsMinting] = useState(false);
+	var MINT_PRICE = (24 * valueSign) * (10 ** 16);
 
 	const handleCloseMask = () => {
 		// Nascondi la maschera quando viene premuto il tasto "x"
@@ -55,6 +56,7 @@ const Home: NextPage = () => {
 		contractName: "SignsNFT",
 		functionName: "mintSigns",
 		args: [BigInt(valueSign)],
+		value: BigInt(MINT_PRICE),
 	});
 
 	const { writeAsync: mintTarrots } = useScaffoldContractWrite({
@@ -71,6 +73,8 @@ const Home: NextPage = () => {
 		}
 		try {
 			setIsMinting(true); // Imposta lo stato del minting su true per indicare che il minting è in corso
+			MINT_PRICE = (24 * valueSign) * (10 ** 16);
+			console.log(MINT_PRICE);
 			await mintSign();
 			// Una volta completato il minting, reimposta lo stato del minting su false
 			setIsMinting(false);

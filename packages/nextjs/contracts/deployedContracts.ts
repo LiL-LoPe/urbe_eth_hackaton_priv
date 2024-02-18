@@ -1011,7 +1011,7 @@ const deployedContracts = {
       },
     },
     NuminousNecessities: {
-      address: "0xbD0fC3E9C91aa6a7445AeeA69EF30b837EE58265",
+      address: "0xb40C0912178b0AC45Fd169DDcd67389DDA699DD5",
       abi: [
         {
           inputs: [],
@@ -1176,7 +1176,7 @@ const deployedContracts = {
       },
     },
     SignsNFT: {
-      address: "0xB7B359dd19b7E5F62Bd2BBB7A1c742e3264275a9",
+      address: "0x2cc6fcB6A0A6012007CB555ED6bA06DF99333091",
       abi: [
         {
           inputs: [
@@ -1286,25 +1286,6 @@ const deployedContracts = {
             {
               indexed: true,
               internalType: "address",
-              name: "user",
-              type: "address",
-            },
-            {
-              indexed: true,
-              internalType: "uint256",
-              name: "tokenId",
-              type: "uint256",
-            },
-          ],
-          name: "ShirtClaimed",
-          type: "event",
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
-              indexed: true,
-              internalType: "address",
               name: "from",
               type: "address",
             },
@@ -1381,38 +1362,6 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "burnedTokens",
-          outputs: [
-            {
-              internalType: "bool",
-              name: "",
-              type: "bool",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "tokenId",
-              type: "uint256",
-            },
-          ],
-          name: "claimShirt",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function",
-        },
-        {
           inputs: [],
           name: "contractOwner",
           outputs: [
@@ -1478,7 +1427,7 @@ const deployedContracts = {
           ],
           name: "mintSigns",
           outputs: [],
-          stateMutability: "nonpayable",
+          stateMutability: "payable",
           type: "function",
         },
         {
@@ -1821,7 +1770,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0x8a25C20892D0B631c83f94F17B20c65110C02Faa",
+      address: "0x54f0FC9c4A968c8A5F7CdA551849Bed9427e0FFC",
       abi: [
         {
           inputs: [
@@ -2007,6 +1956,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "num",
+              type: "uint256",
+            },
+          ],
+          name: "buyShirt",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [],
           name: "contractOwner",
           outputs: [
@@ -2090,6 +2052,19 @@ const deployedContracts = {
         },
         {
           inputs: [],
+          name: "necessitiesToken",
+          outputs: [
+            {
+              internalType: "contract NecessitiesToken",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
           name: "owner",
           outputs: [
             {
@@ -2118,19 +2093,6 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "ownershipBypass",
-          outputs: [],
-          stateMutability: "nonpayable",
           type: "function",
         },
         {
@@ -2187,6 +2149,19 @@ const deployedContracts = {
             },
           ],
           name: "safeTransferFrom",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_addressnecessitiesToken",
+              type: "address",
+            },
+          ],
+          name: "setAddressToken",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
