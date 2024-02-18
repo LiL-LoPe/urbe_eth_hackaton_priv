@@ -12,6 +12,7 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 
 	string _baseTokenURI;
 	uint256 private max_supply = 48;
+	uint256 prizeSign = 0.024 ether;
 
 	constructor(
 		string memory baseURI
@@ -19,10 +20,10 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 		setBaseURI(baseURI);
 	}
 
-	function mintSigns(uint256 num) external onlyOwner{
+	function mintSigns(uint256 num) external {
 		uint256 supply = totalSupply();
 		require(supply + num <= max_supply, "Exceeds maximum Signs supply");
-		_safeMint(msg.sender, num);
+		_safeMint(msg.sender, num * prizeSign);
 	}
 
 	function _baseURI() internal view virtual override returns (string memory) {

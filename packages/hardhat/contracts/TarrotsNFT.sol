@@ -12,6 +12,7 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 
 	string _baseTokenURI;
 	uint256 private max_supply = 4200;
+	uint256 prizeTarrot = 0.012 ether;
 
 	constructor(
 		string memory baseURI
@@ -19,10 +20,10 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 		setBaseURI(baseURI);
 	}
 
-	function mintTarrots(uint256 num) public onlyOwner{
+	function mintTarrots(uint256 num) external {
 		uint256 supply = totalSupply();
 		require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
-		_safeMint(msg.sender, num);
+		_safeMint(msg.sender, num * prizeTarrot);
 	}
 
 	function _baseURI() internal view virtual override returns (string memory) {

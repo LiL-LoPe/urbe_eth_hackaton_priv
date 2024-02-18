@@ -15,6 +15,10 @@
   display: none; /* Nasconde l'immagine PNG quando il mouse ci passa sopra */
 }
 
+.landscape-container {
+	width: 100%;
+}
+
 /* Stile per la maschera */
 .mask {
 	position: fixed;

@@ -43,7 +43,7 @@ const Shop: NextPage = () => {
 
 	return (
 		<>
-		<div className="landscape-background relative flex flex-col justify-center items-center h-screen bg-cover bg-center" style={{ backgroundImage: `url('https://i.ibb.co/Hxh8JHs/bgdefinitivo.jpg')` }}>
+		<div className="landscape-background relative flex flex-col justify-center items-center h-screen bg-cover bg-center" style={{ backgroundImage: `url('/bgshop.jpg')` }}>
 			<div className="shop-div shop-tee">
 				<div className="clothing-item">
 					<img src="/tee1.png" alt="Merch 1" />

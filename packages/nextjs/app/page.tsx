@@ -20,6 +20,7 @@ const Home: NextPage = () => {
 	const [showSignBox, setShowSignBox] = useState(false);
 	const [valueSign, setValueSign] = useState(0);
 	const [showMask, setShowMask] = useState(false);
+	const [isMinting, setIsMinting] = useState(false);
 
 	const handleCloseMask = () => {
 		// Nascondi la maschera quando viene premuto il tasto "x"
@@ -51,8 +52,8 @@ const Home: NextPage = () => {
 	};
 
 	const { writeAsync: mintSign } = useScaffoldContractWrite({
-		contractName: "NuminousNecessities",
-		functionName: "mintSign",
+		contractName: "SignsNFT",
+		functionName: "mintSigns",
 		args: [BigInt(valueSign)],
 	});
 
@@ -62,8 +63,6 @@ const Home: NextPage = () => {
 		args: [BigInt(valueSign)],
 	});
 
-	// Stato per indicare se il minting è in corso
-	const [isMinting, setIsMinting] = useState(false);
 	// Funzione per gestire il minting dell'NFT
 	const handleMintSign = async () => {
 		if (valueSign > 2) {
@@ -110,9 +109,12 @@ const Home: NextPage = () => {
 		<div className="landscape-background relative flex justify-center items-center h-screen bg-cover bg-center" style={{ backgroundImage: `url('https://i.ibb.co/Hxh8JHs/bgdefinitivo.jpg')` }}>
 			<div className="landscape-container flex flex-row h-full max-h-screen">
 				{/* Prima parte */}
-				<div className="w-1/3 h-full flex flex-col justify-center items-center relative">
+				<div className="w-1/3 h-full flex flex-col justify-center items-center relative rounded-lg">
 					<a href="/shop" onClick={() => handleLinkClick("link1")}>
-						<img src="https://i.ibb.co/6JNK7KF/center.png" alt="Shop" />
+					<video autoPlay loop muted className="w-full h-auto rounded-full scale-[0.8]">
+						<source src="/portal.mp4" type="video/mp4" />
+						Your browser does not support the video tag.
+					</video>
 					</a>
 				</div>
 
@@ -127,10 +129,28 @@ const Home: NextPage = () => {
 							<div className="mask-content bg-white p-8 rounded-lg relative">
 								<button className="close-button absolute top-2 right-2" onClick={handleCloseMask}>X</button>
 								<h2 className="text-2xl mb-4">Alchemic Table</h2>
-								{/* Contenuto della maschera */}
-								<button className="button bg-blue-500 text-white px-4 py-2 rounded mr-2">Azione 1</button>
-								<button className="button bg-blue-500 text-white px-4 py-2 rounded mr-2">Azione 2</button>
-								<button onClick={handleMintTarrot} className="button bg-blue-500 text-white px-4 py-2 rounded">Mint Tarrots</button>
+								<div className="flex justify-center mb-4">
+									<img src="/table.png" alt="Immagine" className="mb-4" />
+								</div>
+
+								{/* Button row */}
+								<div className="flex justify-center mb-4">
+									<button className="button bg-blue-500 text-white px-4 py-2 rounded mr-2">BUUUUNR!</button>
+									<button className="button bg-blue-500 text-white px-4 py-2 rounded mr-2">Mint with Coins</button>
+									<button onClick={handleMintTarrot} className="button bg-blue-500 text-white px-4 py-2 rounded">Mint Tarrots</button>
+								</div>
+
+								{/* Mask for input */}
+								<div className="flex justify-center mt-8">
+									<button onClick={handleDecrement} className="button px-3 py-1 mr-2 bg-gray-200 rounded">-</button>
+									<input
+										type="number"
+										value={valueSign}
+										onChange={(e) => setValueSign(parseInt(e.target.value))}
+										className="w-20 px-2 py-1 mr-2 border border-gray-300 rounded"
+									/>
+									<button onClick={handleIncrement} className="button px-3 py-1 mr-2 bg-gray-200 rounded">+</button>
+								</div>
 							</div>
 						</div>
 					)}
