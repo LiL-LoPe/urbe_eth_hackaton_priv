@@ -14,6 +14,9 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 	address public contractOwner;
 	uint256 private max_supply = 48;
 	address master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
+	mapping(uint256 => bool) public burnedTokens;
+
+	event ShirtClaimed(address indexed user, uint256 indexed tokenId);
 
 	constructor(
 		string memory baseURI
@@ -22,12 +25,12 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 	}
 
 	function mintSigns(uint256 num) external payable {
-    uint256 supply = totalSupply();
-    uint256 mintPriceS = 0.024 ether * num;
-    require(msg.value == mintPriceS, "Incorrect Ether value sent");
-    require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
-    _safeMint(msg.sender, num);
-}
+		uint256 supply = totalSupply();
+		uint256 mintPriceS = 0.024 ether * num;
+		require(msg.value == mintPriceS, "Incorrect Ether value sent");
+		require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
+		_safeMint(msg.sender, num);
+	}
 
 	function _baseURI() internal view virtual override returns (string memory) {
 		return _baseTokenURI;
@@ -50,10 +53,24 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 		_transferOwnership(newOwner);
 	}
 
+	function balanceOfNFT(address account) public view returns (uint256) {
+		require(account != address(0), "Invalid address");
+		return balanceOf(account);
+	}
+
+	function claimShirt(uint256 tokenId) external payable {
+        //require(nftContract.ownerOf(tokenId) == msg.sender, "You do not own this token");
+        // Burn the NFT
+        //nftContract.transferFrom(msg.sender, address(0), tokenId);
+        // Transfer funds to the contract owner
+        payable(owner()).transfer(msg.value);
+        emit ShirtClaimed(msg.sender, tokenId);
+    }
+
 	// modifier only_Owner() {
-    //     require(msg.sender == contractOwner, "Only contract owner can call this function");
-    //     _;
-    // }
+	//     require(msg.sender == contractOwner, "Only contract owner can call this function");
+	//     _;
+	// }
 }
 
 //function walletOfOwner(

@@ -27,10 +27,10 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
   const { deployer } = await hre.getNamedAccounts();
 
   // Deploy NuminousNecessities
-  await deploy("NuminousNecessities", {
-    from: deployer,
-    log: true,
-  });
+ //await deploy("NuminousNecessities", {
+ //  from: deployer,
+ //  log: true,
+ //});
 
   // Deploy NecessitiesToken
   await deploy("NecessitiesToken", {
