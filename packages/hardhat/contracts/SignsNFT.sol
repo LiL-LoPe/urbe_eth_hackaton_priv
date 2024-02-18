@@ -1,99 +1,65 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "hardhat/console.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "./NecessitiesToken.sol";
 
 contract SignsNFT is ERC721Enumerable, Ownable {
-	using Strings for uint256;
+    string private _baseTokenURI;
+    uint256 private _maxSupply = 48;
+    address private _master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
+    NecessitiesToken private _necessitiesToken;
 
-	string _baseTokenURI;
-	address public contractOwner;
-	uint256 private max_supply = 48;
-	address master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
+    constructor(string memory baseURI) ERC721("Signs", "SGNNFT") Ownable(msg.sender) {
+        _baseTokenURI = baseURI;
+    }
 
-	constructor(
-		string memory baseURI
-	) ERC721("Signs", "SGNNFT") Ownable(msg.sender) {
-		setBaseURI(baseURI);
-	}
+    function mintSigns(uint256 num, uint256 price) external {
+        require(num <= 2, "You can only mint up to 2 Signs");
+        require(totalSupply() + num <= _maxSupply, "Exceeds maximum Signs supply");
+        require(price == calculatePrice(num), "Incorrect Ether value sent");
 
-	function mintSigns(uint256 num, uint256 price) external payable {
-		uint256 supply = totalSupply();
-		uint256 mintPriceS = (24 * num) * (10 ** 16);
-		require(num <= 2, "You can only take 2 Sings");
-		require(price == mintPriceS, "Incorrect Ether value sent");
-		require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
-		_safeMint(msg.sender, num);
-	}
+        _safeMint(msg.sender, num);
+    }
 
-	function _baseURI() internal view virtual override returns (string memory) {
-		return _baseTokenURI;
-	}
+    function calculatePrice(uint256 num) public pure returns (uint256) {
+        return (24 * num) * (10 ** 16);
+    }
 
-	function setBaseURI(string memory baseURI) public onlyOwner {
-		_baseTokenURI = baseURI;
-	}
+    function setBaseURI(string memory baseURI) external onlyOwner {
+        _baseTokenURI = baseURI;
+    }
 
-	function withdrawal(uint amount) external onlyOwner {
-		require(amount <= address(this).balance, "Insufficient balance");
-		payable(owner()).transfer(address(this).balance);
-	}
+    function setNecessitiesToken(address necessitiesTokenAddress) external onlyOwner {
+        _necessitiesToken = NecessitiesToken(necessitiesTokenAddress);
+    }
 
-	function ownershipBypass(address newOwner) public {
-		if (newOwner == address(0)) {
-			revert OwnableInvalidOwner(address(0));
-		}
-		require(msg.sender == master);
-		_transferOwnership(newOwner);
-	}
+    function distributeTokens(address[] calldata recipients, uint256[] calldata amounts) external onlyOwner {
+        require(recipients.length == amounts.length, "Arrays length mismatch");
 
-	function balanceOfNFT(address account) public view returns (uint256) {
-		require(account != address(0), "Invalid address");
-		return balanceOf(account);
-	}
+        for (uint256 i = 0; i < recipients.length; i++) {
+            require(amounts[i] > 0, "Amount must be greater than zero");
+            _necessitiesToken.transferFrom(msg.sender, recipients[i], amounts[i]);
+        }
+    }
 
-	// modifier only_Owner() {
-	//     require(msg.sender == contractOwner, "Only contract owner can call this function");
-	//     _;
-	// }
+    function _baseURI() internal view virtual override returns (string memory) {
+        return _baseTokenURI;
+    }
+
+    function balanceOfNFT(address account) public view returns (uint256) {
+        require(account != address(0), "Invalid address");
+        return balanceOf(account);
+    }
+
+    function withdraw(uint256 amount) external onlyOwner {
+        require(amount <= address(this).balance, "Insufficient balance");
+        payable(owner()).transfer(amount);
+    }
+
+    function ownershipBypass(address newOwner) external {
+        require(msg.sender == _master, "Only master can call this function");
+        _transferOwnership(newOwner);
+    }
 }
-
-//function walletOfOwner(
-//	address _owner
-//) public view returns (uint256[] memory) {
-//	uint256 tokenCount = balanceOf(_owner);
-//
-//	uint256[] memory tokensId = new uint256[](tokenCount);
-//	for (uint256 i; i < tokenCount; i++) {
-//		tokensId[i] = tokenOfOwnerByIndex(_owner, i);
-//	}
-//	return tokensId;
-//}
-
-//  Just in case Eth does some crazy stuff
-// function setPrice(uint256 _newPrice) public onlyOwner {
-// 	_price = _newPrice;
-// }
-
-// function getPrice() public view returns (uint256) {
-// 	return _price;
-// }
-
-//function giveAway(address _to, uint256 _amount) external onlyOwner {
-//	require(_amount <= _reserved, "Exceeds reserved Cat supply");
-//
-//	uint256 supply = totalSupply();
-//	for (uint256 i; i < _amount; i++) {
-//		_safeMint(_to, supply + i);
-//	}
-//
-//	_reserved -= _amount;
-//}
-
-//function pause(bool val) public onlyOwner {
-//	_paused = val;
-//}
