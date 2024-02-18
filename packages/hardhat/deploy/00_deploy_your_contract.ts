@@ -26,6 +26,12 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
   const { deploy } = hre.deployments;
   const { deployer } = await hre.getNamedAccounts();
 
+  // Deploy NuminousNecessities
+ //await deploy("NuminousNecessities", {
+ //  from: deployer,
+ //  log: true,
+ //});
+
   // Deploy NecessitiesToken
   await deploy("NecessitiesToken", {
     from: deployer,
@@ -35,14 +41,14 @@ const deployContracts: DeployFunction = async function (hre: HardhatRuntimeEnvir
   // Deploy SignsNFT
   await deploy("SignsNFT", {
     from: deployer,
-    args: ["wWECWRVQWTBYENURYMJ"],
+    args: ["https://ibb.co/k8gZ8Pg"],
     log: true,
   });
 
   // Deploy TarrotsNFT
   await deploy("TarrotsNFT", {
     from: deployer,
-    args: ["xECWTBYEHNJRYM"],
+    args: ["https://ibb.co/mHDZyzD"],
     log: true,
   });
 
