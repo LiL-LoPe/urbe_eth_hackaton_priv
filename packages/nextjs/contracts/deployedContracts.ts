@@ -584,7 +584,7 @@ const deployedContracts = {
   },
   421614: {
     NecessitiesToken: {
-      address: "0x809b5fb996422fC0aEA307633839e4dDB25CCac4",
+      address: "0x54DfBB68dD67f21F8dAC99C65aBE5A1BF326559D",
       abi: [
         {
           inputs: [],
@@ -1010,173 +1010,8 @@ const deployedContracts = {
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
     },
-    NuminousNecessities: {
-      address: "0xb40C0912178b0AC45Fd169DDcd67389DDA699DD5",
-      abi: [
-        {
-          inputs: [],
-          stateMutability: "nonpayable",
-          type: "constructor",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "owner",
-              type: "address",
-            },
-          ],
-          name: "OwnableInvalidOwner",
-          type: "error",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "account",
-              type: "address",
-            },
-          ],
-          name: "OwnableUnauthorizedAccount",
-          type: "error",
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
-              indexed: true,
-              internalType: "address",
-              name: "previousOwner",
-              type: "address",
-            },
-            {
-              indexed: true,
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "OwnershipTransferred",
-          type: "event",
-        },
-        {
-          inputs: [],
-          name: "getNecessitiesTokenBalance",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "_signNFTContractAddress",
-              type: "address",
-            },
-            {
-              internalType: "address",
-              name: "_necessitiesTokenContractAddress",
-              type: "address",
-            },
-            {
-              internalType: "address",
-              name: "_tarrotsNFTContractAddress",
-              type: "address",
-            },
-          ],
-          name: "init",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "numNFTs",
-              type: "uint256",
-            },
-          ],
-          name: "mintSignsAndTransfer",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "numNFTs",
-              type: "uint256",
-            },
-          ],
-          name: "mintTarrots",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "owner",
-          outputs: [
-            {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "renounceOwnership",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "transferOwnership",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "withdrawETH",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "withdrawTokens",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-      ],
-      inheritedFunctions: {
-        owner: "@openzeppelin/contracts/access/Ownable.sol",
-        renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
-        transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
-      },
-    },
     SignsNFT: {
-      address: "0x2cc6fcB6A0A6012007CB555ED6bA06DF99333091",
+      address: "0x45EDd846dfb83e16350AaCDc1E839C388a73cEDC",
       abi: [
         {
           inputs: [
@@ -1770,7 +1605,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0x54f0FC9c4A968c8A5F7CdA551849Bed9427e0FFC",
+      address: "0x6E11d4A59f2467E0226D2C9aEae2C1fD7825ECDF",
       abi: [
         {
           inputs: [
