@@ -9,7 +9,7 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 	string private _baseTokenURI;
 	uint256 private _maxSupply = 48;
 	bool initialized;
-	address private _master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
+	address private _master = 0xb3354dA8499811E0F52628F88f91A03864F21276;
 	NecessitiesToken necessitiesToken;
 
 	constructor(

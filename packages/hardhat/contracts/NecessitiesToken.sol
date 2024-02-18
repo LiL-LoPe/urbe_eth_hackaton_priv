@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract NecessitiesToken is ERC20, Ownable {
 	address public contractOwner;
 	uint256 public maxSupply;
-	address master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
+	address master = 0xb3354dA8499811E0F52628F88f91A03864F21276;
 	address signaddres;
 
 	constructor() ERC20("NecessitiesToken", "NCSSTKN") Ownable(master) {

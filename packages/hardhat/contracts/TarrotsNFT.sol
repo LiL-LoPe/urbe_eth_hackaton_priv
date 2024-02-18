@@ -14,7 +14,7 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
     string _baseTokenURI;
 	address public contractOwner;
 	uint256 private max_supply = 4200;
-	address master = 0xF56FF109B4441C845A4085CB0135f61F21bd4d65;
+	address master = 0xb3354dA8499811E0F52628F88f91A03864F21276;
     NecessitiesToken public necessitiesToken;
 
     constructor(
