@@ -21,10 +21,11 @@ contract SignsNFT is ERC721Enumerable, Ownable {
 		setBaseURI(baseURI);
 	}
 
-	function mintSigns(uint256 num) external payable {
+	function mintSigns(uint256 num, uint256 price) external payable {
 		uint256 supply = totalSupply();
-		uint256 mintPriceS = 0.024 ether * num;
-		require(msg.value == mintPriceS, "Incorrect Ether value sent");
+		uint256 mintPriceS = (24 * num) * (10 ** 16);
+		require(num <= 2, "You can only take 2 Sings");
+		require(price == mintPriceS, "Incorrect Ether value sent");
 		require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
 		_safeMint(msg.sender, num);
 	}
