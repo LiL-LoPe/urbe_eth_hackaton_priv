@@ -1135,7 +1135,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      address: "0xc8785C90eaa48A9d7467922E304768db6373366f",
       abi: [
         {
           inputs: [
@@ -1686,7 +1686,7 @@ const deployedContracts = {
   },
   421614: {
     NecessitiesToken: {
-      address: "0x08F3303f56Bf151AED0C870BA158b12bF418E11e",
+      address: "0xC1134212a32DCd7b4ca1CCc639f98881c1e2A6Fa",
       abi: [
         {
           inputs: [],
@@ -1983,6 +1983,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "ownershipBypass",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [],
           name: "renounceOwnership",
           outputs: [],
@@ -2100,7 +2113,7 @@ const deployedContracts = {
       },
     },
     NuminousNecessities: {
-      address: "0xD91Ad74048b47Ec82e47cd6a8B2A81659140fFc4",
+      address: "0xf153dAAe06aF3BcDaa5ec2c68d196437aBE09F10",
       abi: [
         {
           inputs: [],
@@ -2265,7 +2278,7 @@ const deployedContracts = {
       },
     },
     SignsNFT: {
-      address: "0xE6161E16c97052AB0B9A489f4e9A39F81a498D79",
+      address: "0x48d7ac7a3dB4AD1052941d1F4F075e6664B251a9",
       abi: [
         {
           inputs: [
@@ -2432,6 +2445,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "contractOwner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "uint256",
@@ -2530,6 +2556,19 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "ownershipBypass",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
@@ -2814,7 +2853,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0x33112DdD4B06620d823a4c343b5bcF49F46cfdB2",
+      address: "0xA1145F7e9cb1D289818e891880C14C20dCe65F08",
       abi: [
         {
           inputs: [
@@ -2981,6 +3020,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "contractOwner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "uint256",
@@ -3033,7 +3085,7 @@ const deployedContracts = {
           ],
           name: "mintTarrots",
           outputs: [],
-          stateMutability: "nonpayable",
+          stateMutability: "payable",
           type: "function",
         },
         {
@@ -3079,6 +3131,19 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "ownershipBypass",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
