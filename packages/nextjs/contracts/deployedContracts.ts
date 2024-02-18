@@ -584,7 +584,7 @@ const deployedContracts = {
   },
   421614: {
     NecessitiesToken: {
-      address: "0x681E400eF233166Ac935b0756Bb7fEb4DDbcff79",
+      address: "0x809b5fb996422fC0aEA307633839e4dDB25CCac4",
       abi: [
         {
           inputs: [],
@@ -881,6 +881,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "ownershipBypass",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [],
           name: "renounceOwnership",
           outputs: [],
@@ -998,7 +1011,7 @@ const deployedContracts = {
       },
     },
     NuminousNecessities: {
-      address: "0xeD352177f2E287BCa1f9ea577aAEd4F9A1c1A66D",
+      address: "0xbD0fC3E9C91aa6a7445AeeA69EF30b837EE58265",
       abi: [
         {
           inputs: [],
@@ -1163,7 +1176,7 @@ const deployedContracts = {
       },
     },
     SignsNFT: {
-      address: "0x21EF558FA01348e0119DD0F10338535f46ef07e0",
+      address: "0xB7B359dd19b7E5F62Bd2BBB7A1c742e3264275a9",
       abi: [
         {
           inputs: [
@@ -1273,6 +1286,25 @@ const deployedContracts = {
             {
               indexed: true,
               internalType: "address",
+              name: "user",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "tokenId",
+              type: "uint256",
+            },
+          ],
+          name: "ShirtClaimed",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
               name: "from",
               type: "address",
             },
@@ -1324,6 +1356,70 @@ const deployedContracts = {
               internalType: "uint256",
               name: "",
               type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOfNFT",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "burnedTokens",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "tokenId",
+              type: "uint256",
+            },
+          ],
+          name: "claimShirt",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "contractOwner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
             },
           ],
           stateMutability: "view",
@@ -1428,6 +1524,19 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "ownershipBypass",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
@@ -1712,7 +1821,7 @@ const deployedContracts = {
       },
     },
     TarrotsNFT: {
-      address: "0xb1712F7ffCc5D4B34CEaD413b33bB5cEd1225dB1",
+      address: "0x8a25C20892D0B631c83f94F17B20c65110C02Faa",
       abi: [
         {
           inputs: [
@@ -1881,6 +1990,38 @@ const deployedContracts = {
         {
           inputs: [
             {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOfNFT",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "contractOwner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
               internalType: "uint256",
               name: "tokenId",
               type: "uint256",
@@ -1931,7 +2072,7 @@ const deployedContracts = {
           ],
           name: "mintTarrots",
           outputs: [],
-          stateMutability: "nonpayable",
+          stateMutability: "payable",
           type: "function",
         },
         {
@@ -1977,6 +2118,19 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "ownershipBypass",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {

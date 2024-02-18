@@ -44,12 +44,12 @@
 }
 
 .clothing-item {
-	position: relative; /* Per posizionare correttamente il pulsante */
+	position: relative;
 }
 
 .clothing-item .buy-button {
 	position: absolute;
-	bottom: -40px; /* Posizione iniziale nascosta sopra il contenitore */
+	bottom: -40px;
 	left: 0;
 	width: 100%;
 	padding: 10px;
@@ -58,9 +58,19 @@
 	border: none;
 	border-radius: 0 0 8px 8px;
 	cursor: pointer;
-	transition: bottom 0.3s ease; /* Aggiungi transizione per l'animazione */
+	transition: bottom 0.3s ease;
 }
 
 .clothing-item:hover .buy-button {
-	bottom: 0; /* Visualizza il pulsante al passaggio del mouse */
+	bottom: 0;
+}
+
+.discount-label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #ff0000;
+	color: #ffffff;
+	padding: 5px 10px;
+	border-radius: 5px;
 }
