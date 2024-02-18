@@ -25,7 +25,7 @@ contract NecessitiesToken is ERC20, Ownable {
 	//	);
 	//	_;
 	//}
-	//function transfer_Ownership(address newOwner) external onlyOwner {
+	//function transferOwnership(address newOwner) external onlyOwner {
 	//	require(newOwner != address(0), "Invalid address");
 	//	require(
 	//		msg.sender == contract_Owner,

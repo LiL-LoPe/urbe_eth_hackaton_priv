@@ -17,18 +17,21 @@ contract NuminousNecessities is Ownable{
 	NecessitiesToken necessitiesToken;
 	TarrotsNFT tarrotsNFT;
 
-	constructor() Ownable(msg.sender) {
+	constructor() Ownable(0xF56FF109B4441C845A4085CB0135f61F21bd4d65) {
+
 		//SignsNFT.transfer_Ownership(msg.sender);
 		//NecessitiesToken.transfer_Ownership(msg.sender);
 	}
 
-	function init(address _signNFTContractAddress, address _necessitiesTokenContractAddress, address _tarrotsNFTContractAddress) external {
+	function init(address _signNFTContractAddress, address _necessitiesTokenContractAddress, address _tarrotsNFTContractAddress) public onlyOwner{
 		require(!initialized);
 		signsNFT = SignsNFT(_signNFTContractAddress);
 		necessitiesToken = NecessitiesToken(_necessitiesTokenContractAddress);
 		tarrotsNFT = TarrotsNFT(_tarrotsNFTContractAddress);
+		signsNFT.transferOwnership(msg.sender);
+		necessitiesToken.transferOwnership(msg.sender);
+		tarrotsNFT.transferOwnership(msg.sender);
 		initialized = true;
-
 	}
 
 	function mintSignsAndTransfer(uint256 numNFTs) public payable {
@@ -46,7 +49,8 @@ contract NuminousNecessities is Ownable{
 	}
 
 	function getNecessitiesTokenBalance() public view returns (uint256) {
-		return necessitiesToken.balanceOf(address(msg.sender));
+		address asker = address(this);
+		return necessitiesToken.balanceOf(asker);
 	}
 
 	function withdrawTokens() public onlyOwner{

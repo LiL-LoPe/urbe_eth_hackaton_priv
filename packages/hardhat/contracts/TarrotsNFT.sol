@@ -19,7 +19,7 @@ contract TarrotsNFT is ERC721Enumerable, Ownable {
 		setBaseURI(baseURI);
 	}
 
-	function mintTarrots(uint256 num) external onlyOwner{
+	function mintTarrots(uint256 num) public onlyOwner{
 		uint256 supply = totalSupply();
 		require(supply + num <= max_supply, "Exceeds maximum Tarrots supply");
 		_safeMint(msg.sender, num);
